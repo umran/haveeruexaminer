@@ -1,0 +1,23 @@
+doctype html
+html
+	head
+		title= title + ' | judicialwatchmv.org'
+		link(rel='stylesheet', href='/stylesheets/semantic.min.css')
+		link(rel='stylesheet', href='/fonts/font-awesome-4.3.0/css/font-awesome.min.css')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		script(type='text/javascript' src='/javascripts/jquery.min.js')
+		script(type='text/javascript' src='/javascripts/semantic.min.js')
+		script(type='text/javascript' src='/javascripts/main.js')
+	body
+		div(class='ui masthead segment' id='nav')
+			div(class='ui page grid')
+				div(class='column')
+					div(class='ui secondary menu')
+						div(class='header item' id='header')='judicialwatchmv.org'
+						div(class='right menu')
+							a(class='item')='Home'
+							a(class='item')='Reports'
+							a(class='item')='Archive'
+							a(class='item')='Data'
+							a(class='item')='Blog'
+		block content

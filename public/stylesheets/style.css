@@ -1,0 +1,19 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+@font-face
+
+body{
+  background: #FFF;
+}
+
+#nav{
+	border-radius: 0px;
+}
+
+#header{
+	border-right: 0px;
+}
+
+#entry-item{
+	margin-top:1em;
+}
