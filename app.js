@@ -17,7 +17,7 @@ var auth = require('./routes/auth');
 var app = express();
 
 // initialize mongo connection
-mongoose.connect('mongodb://localhost/judicialwatchmv');
+mongoose.connect('mongodb://localhost/haveeruexaminer');
 var conn = mongoose.connection;
 // export mongo connection object
 app.mongod = conn;
