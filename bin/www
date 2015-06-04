@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var debug = require('debug')('judicialwatchmv:server');
+var debug = require('debug')('haveeruexaminer:server');
 var serverObject = require("../dependencies/serverobject");
 var httpd = serverObject.httpd;
 var mongod = serverObject.mongod;
