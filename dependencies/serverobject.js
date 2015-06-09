@@ -13,10 +13,12 @@ var io = require('socket.io')(server);
 // start http and socket.io server
 server.listen(port);
 
+//pass io object to io module
+require('./io')(io);
+
 // isolate mongod connection and prepare for export
 mongod = app.mongod;
 
 // export variables
 module.exports.httpd = server;
 module.exports.mongod = mongod;
-module.exports.io = io;

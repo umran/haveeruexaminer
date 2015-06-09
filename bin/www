@@ -8,7 +8,7 @@ httpd.on('error', onError);
 httpd.on('listening', onListening);
 
 mongod.on('error', console.error.bind(console, 'Database connection error:'));
-mongod.once('open', function callback () { debug('Database reachable and ready to serve requests') });
+mongod.once('open', function() { debug('Database reachable and ready to serve requests') });
 
 /**
  * Event listener for HTTP server "error" event.

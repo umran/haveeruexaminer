@@ -1,6 +1,8 @@
 var read = require('request');
 var cheerio = require('cheerio');
 var async = require('async');
+var client = require('socket.io-client');
+var socket = client.connect('http://localhost:3000');
 
 //debugging code
 //var count = 0;
@@ -11,7 +13,7 @@ var q = async.queue(function(task,callback){
 		if(error){
 			return callback(error);
 		}
-		if(response.statusCode == 200){
+		if(response.statusCode === 200){
 			$ = cheerio.load(body);
 			var links = $('a');
 			$(links).each(function(i, link){
@@ -21,13 +23,14 @@ var q = async.queue(function(task,callback){
 					var checkstring = new RegExp('(https?:\/\/haveeru\.com\.mv|https?:\/\/www\.haveeru\.com\.mv)');
 					if(string.charAt(0) === '/' || checkstring.test(string) === true){
 						if (string.charAt(0) === '/'){
-							var string = prefix.concat(string);
+							string = prefix.concat(string);
 						}
 						q.push({url:string}, function(err, res){
 							if(err){
 								return console.log(err);
 							}
-							console.log(res);
+							//console.log(res);
+							socket.emit('test', res);
 							
 							//debugging code
 							//count++;
