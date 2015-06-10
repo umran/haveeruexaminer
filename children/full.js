@@ -5,101 +5,128 @@ var async = require('async');
 var client = require('socket.io-client');
 var io = client.connect('http://localhost:3000');
 var crypto = require('crypto');
+
+var prefix = 'http://haveeru.com.mv';
+var checkstring = new RegExp('(https?:\/\/haveeru\.com\.mv|https?:\/\/www\.haveeru\.com\.mv)');
 var urls = [];
 
 var q = async.queue(function(task,callback){
 	var url = task.url;
+	if(urls.indexOf(url) > -1){
+    return callback();
+  }
 	read(url, function(error, response, body){
 		if(error){
 			return callback(error);
 		}
+		
 		var resObject = {};
-		if(response.statusCode === 200){
-			var $ = cheerio.load(body);
-			var links = $('a');
-			$(links).each(function(i, link){
-				if($(link).attr('href')){
-					var string = $(link).attr('href');
-					var prefix = 'http://haveeru.com.mv';
-					var checkstring = new RegExp('(https?:\/\/haveeru\.com\.mv|https?:\/\/www\.haveeru\.com\.mv)');
-					if(string.charAt(0) === '/' || checkstring.test(string) === true){
-						if (string.charAt(0) === '/'){
-							string = prefix.concat(string);
-						}
-						if(urls.indexOf(string) > -1){
-							console.log('duplicate link disregarded');
-							return;
-						}
-						q.push({url:string}, function(err, res){
-							if(err){
-								return io.emit('test', err);
-							}
-							if(res.hash){
-								//urls.push(res.url);
-								return io.emit('test', res.hash);
-							}
-							io.emit('test', res.statusCode);
-						});
-					}
+		resObject.url = url;
+		resObject.statusCode = response.statusCode;
+		
+		if(response.statusCode !== 200){ 
+    	return callback(null, resObject);
+ 		}
+		var $ = cheerio.load(body);
+		$($('a')).each(function(i, link){
+    	if(!$(link).attr('href')){
+    		return;
+    	}
+    	
+    	//filter and format link
+    	if ($(link).attr('href').charAt(0) !== '/' && checkstring.test($(link).attr('href')) === false){
+    		return;
+    	}
+    	link = $(link).attr('href');
+    	if (link.charAt(0) === '/'){
+    		link = prefix.concat(link);
+    	}
+    	
+    	if(urls.indexOf(link) > -1){
+    		io.emit('test', '	duplicate prevented from joining queue');
+    		return;
+    	}
+			q.push({url:link}, function(err, res){
+				if(err){
+					return io.emit('test', err);
 				}
+				if(!res){
+					return io.emit('test', 'caught duplicate duly dropped from queue');
+				}
+				if(res.statusCode !== 200){
+					return io.emit('test', 'server returned !200 for resource: '+res.url);
+				}
+				
+				urls.push(res.url);
+				
+				if(res.exception === true){
+					return io.emit('test', 'could not determine if article for: '+res.url);
+				}
+				if(!res.hash){
+					return io.emit('test', 'not an article, so skipping: '+res.url);
+				}
+				io.emit('test', res.url+' was computed as '+res.hash);
 			});
-			var article = $('.post-frame');
-			if(article.length === 0){
-				//urls.push(url);
-				return callback('Skipping document: not an article');
-			}
-			if(article.find($('.related-articles')).length === 0){
-				if(article.find($('.service-holder')).length === 0){
-					if(article.find($('.comments')).length === 0){
-						return callback('Unfamiliar document structure: not sure where to truncate article');
-					}
-					else{
-						var until = '.comments';
-					}
+		});
+		
+		//document processing
+		if($('.post-frame').length === 0){
+			urls.push(url);
+			return callback(null, resObject);
+		}
+		var until;
+		if($('.post-frame').find($('.related-articles')).length === 0){
+			if($('.post-frame').find($('.service-holder')).length === 0){
+				if($('.post-frame').find($('.comments')).length === 0){
+					resObject.exception = true;
+					return callback(null, resObject);
 				}
 				else{
-					var until = '.service-holder';
+					until = '.comments';
 				}
 			}
 			else{
-				var until = '.related-articles';
+				until = '.service-holder';
 			}
-			
-			var title = $('h1', '.post').text();
-			var byline = $('.subttl', '.post').text();
-			var date = $('.date', '.post').text();
-			
-			var intro = $('.intro','.post-frame').html();
-			var main = $('.intro','.post-frame').nextUntil(until).html();
-			
-			var head = title.concat(byline);
-			head = head.concat(date);
-		
-			var payload = intro.concat(main);
-		
-			var document = head.concat(payload);
-		
-			//calculate document hash
-		
-			var hash = crypto.createHash('sha256').update(document).digest('hex');
-			
-			resObject.url = url;
-			resObject.title = title;
-			resObject.document = document;
-			resObject.hash = hash;
 		}
+		else{
+			until = '.related-articles';
+		}
+		
+		resObject.title = $('h1', '.post').text();
+		resObject.byline = $('.subttl', '.post').text();
+		resObject.date = $('.date', '.post').text();
+		
+		resObject.intro = $('.intro','.post-frame').html();
+		resObject.main = $('.intro','.post-frame').nextUntil(until).html();
+	
+		//calculate document hash
+	
+		resObject.hash = crypto.createHash('sha256').update(resObject.url.concat(resObject.title,resObject.byline,resObject.date,resObject.intro,resObject.main)).digest('hex');
 		resObject.statusCode = response.statusCode;
 		callback(null, resObject);
 	});
-}, 1);
+}, 20);
 
-var url = 'http://www.haveeru.com.mv';
-q.push({url:url}, function(err, res){
+var seed = 'http://www.haveeru.com.mv';
+q.push({url:seed}, function(err, res){
 	if(err){
 		return io.emit('test', err);
 	}
-	if(res.statusCode === 200){
-		return io.emit('test', res.hash);
+	if(!res){
+		return io.emit('test', 'caught duplicate duly dropped from queue');
 	}
-	io.emit('test', res.statusCode);
+	if(res.statusCode !== 200){
+		return io.emit('test', 'server returned !200 for resource: '+res.url);
+	}
+				
+	urls.push(res.url);
+				
+	if(res.exception === true){
+		return io.emit('test', 'could not determine if article for: '+res.url);
+	}
+	if(!res.hash){
+		return io.emit('test', 'not an article, so skipping: '+res.url);
+	}
+	io.emit('test', res.url+' was computed as '+res.hash);
 });
