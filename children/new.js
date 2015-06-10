@@ -7,13 +7,14 @@ var request = require('request')
   , checkstring = new RegExp('(https?:\/\/haveeru\.com\.mv|https?:\/\/www\.haveeru\.com\.mv)');
  
 var queue = async.queue(function(url, next) {
-  if (!url) return next(null);
-  //if (url.charAt(0) !== '/' && checkstring.test(url) === false) return next(null);
-  //if (url.charAt(0) === '/') url = prefix.concat(url); 
+	if(seen[url]) return next(); 
   request(url, function(err, response, body){
-    if (err) return next(err);
- 		if(response.statusCode !== 200) return next(null);
- 
+    if (err){
+    	return next(err);
+    }
+    if(response.statusCode !== 200){ 
+    	return next(null);
+ 		}
     seen[url] = true;
     console.log(url);
     var $ = cheerio.load(body);
@@ -32,7 +33,7 @@ var queue = async.queue(function(url, next) {
     	
     });
  
-    next(null);
+    next();
   });
 }, 2);
  
