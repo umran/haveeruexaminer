@@ -15,7 +15,7 @@ read(url, function(error, response, body){
 		console.log(error);
 	}
 	if(response.statusCode === 200){
-		$ = cheerio.load(body, {decodeEntities: false});
+		var $ = cheerio.load(body, {decodeEntities: false});
 		var article = $('.post-frame');
 		if(article.length === 0){
 			console.log('not an article');

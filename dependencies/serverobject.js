@@ -17,7 +17,7 @@ server.listen(port);
 require('./io')(io);
 
 // isolate mongod connection and prepare for export
-mongod = app.mongod;
+var mongod = app.mongod;
 
 // export variables
 module.exports.httpd = server;

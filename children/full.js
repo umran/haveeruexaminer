@@ -1,9 +1,11 @@
+require('v8-profiler');
 var read = require('request');
 var cheerio = require('cheerio');
 var async = require('async');
 var client = require('socket.io-client');
 var io = client.connect('http://localhost:3000');
 var crypto = require('crypto');
+var urls = [];
 
 var q = async.queue(function(task,callback){
 	var url = task.url;
@@ -13,7 +15,7 @@ var q = async.queue(function(task,callback){
 		}
 		var resObject = {};
 		if(response.statusCode === 200){
-			$ = cheerio.load(body);
+			var $ = cheerio.load(body);
 			var links = $('a');
 			$(links).each(function(i, link){
 				if($(link).attr('href')){
@@ -24,11 +26,16 @@ var q = async.queue(function(task,callback){
 						if (string.charAt(0) === '/'){
 							string = prefix.concat(string);
 						}
+						if(urls.indexOf(string) > -1){
+							console.log('duplicate link disregarded');
+							return;
+						}
 						q.push({url:string}, function(err, res){
 							if(err){
 								return io.emit('test', err);
 							}
-							if(res.statusCode === 200){
+							if(res.hash){
+								//urls.push(res.url);
 								return io.emit('test', res.hash);
 							}
 							io.emit('test', res.statusCode);
@@ -38,12 +45,13 @@ var q = async.queue(function(task,callback){
 			});
 			var article = $('.post-frame');
 			if(article.length === 0){
-				return callback('Skipping, not an article');
+				//urls.push(url);
+				return callback('Skipping document: not an article');
 			}
 			if(article.find($('.related-articles')).length === 0){
 				if(article.find($('.service-holder')).length === 0){
 					if(article.find($('.comments')).length === 0){
-						return callback('Unhandled Exception: not sure where to truncate article');
+						return callback('Unfamiliar document structure: not sure where to truncate article');
 					}
 					else{
 						var until = '.comments';
@@ -56,14 +64,14 @@ var q = async.queue(function(task,callback){
 			else{
 				var until = '.related-articles';
 			}
-		
+			
 			var title = $('h1', '.post').text();
 			var byline = $('.subttl', '.post').text();
 			var date = $('.date', '.post').text();
-		
+			
 			var intro = $('.intro','.post-frame').html();
 			var main = $('.intro','.post-frame').nextUntil(until).html();
-		
+			
 			var head = title.concat(byline);
 			head = head.concat(date);
 		
@@ -83,7 +91,7 @@ var q = async.queue(function(task,callback){
 		resObject.statusCode = response.statusCode;
 		callback(null, resObject);
 	});
-}, 20);
+}, 1);
 
 var url = 'http://www.haveeru.com.mv';
 q.push({url:url}, function(err, res){
