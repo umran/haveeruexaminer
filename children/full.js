@@ -5,47 +5,41 @@ var async = require('async');
 var client = require('socket.io-client');
 var io = client.connect('http://localhost:3000');
 var crypto = require('crypto');
-
 var prefix = 'http://haveeru.com.mv';
 var checkstring = new RegExp('(https?:\/\/haveeru\.com\.mv|https?:\/\/www\.haveeru\.com\.mv)');
 var urls = [];
-
 var q = async.queue(function(task,callback){
 	var url = task.url;
 	if(urls.indexOf(url) > -1){
-    return callback();
-  }
+		return callback();
+	}
 	read(url, function(error, response, body){
 		if(error){
 			return callback(error);
 		}
-		
 		var resObject = {};
 		resObject.url = url;
 		resObject.statusCode = response.statusCode;
-		
 		if(response.statusCode !== 200){ 
-    	return callback(null, resObject);
- 		}
+			return callback(null, resObject);
+		}
 		var $ = cheerio.load(body);
 		$($('a')).each(function(i, link){
-    	if(!$(link).attr('href')){
-    		return;
-    	}
-    	
+			if(!$(link).attr('href')){
+				return;
+			}
     	//filter and format link
-    	if ($(link).attr('href').charAt(0) !== '/' && checkstring.test($(link).attr('href')) === false){
-    		return;
-    	}
-    	link = $(link).attr('href');
-    	if (link.charAt(0) === '/'){
-    		link = prefix.concat(link);
-    	}
-    	
+			if ($(link).attr('href').charAt(0) !== '/' && checkstring.test($(link).attr('href')) === false){
+				return;
+			}
+			link = $(link).attr('href');
+			if (link.charAt(0) === '/'){
+				link = prefix.concat(link);
+			}
     	if(urls.indexOf(link) > -1){
-    		io.emit('test', '	duplicate prevented from joining queue');
-    		return;
-    	}
+				io.emit('test', '	duplicate prevented from joining queue');
+				return;
+			}
 			q.push({url:link}, function(err, res){
 				if(err){
 					return io.emit('test', err);
@@ -56,9 +50,7 @@ var q = async.queue(function(task,callback){
 				if(res.statusCode !== 200){
 					return io.emit('test', 'server returned !200 for resource: '+res.url);
 				}
-				
 				urls.push(res.url);
-				
 				if(res.exception === true){
 					return io.emit('test', 'could not determine if article for: '+res.url);
 				}
@@ -68,7 +60,6 @@ var q = async.queue(function(task,callback){
 				io.emit('test', res.url+' was computed as '+res.hash);
 			});
 		});
-		
 		//document processing
 		if($('.post-frame').length === 0){
 			urls.push(url);
@@ -92,22 +83,17 @@ var q = async.queue(function(task,callback){
 		else{
 			until = '.related-articles';
 		}
-		
 		resObject.title = $('h1', '.post').text();
 		resObject.byline = $('.subttl', '.post').text();
 		resObject.date = $('.date', '.post').text();
-		
 		resObject.intro = $('.intro','.post-frame').html();
 		resObject.main = $('.intro','.post-frame').nextUntil(until).html();
-	
 		//calculate document hash
-	
 		resObject.hash = crypto.createHash('sha256').update(resObject.url.concat(resObject.title,resObject.byline,resObject.date,resObject.intro,resObject.main)).digest('hex');
 		resObject.statusCode = response.statusCode;
 		callback(null, resObject);
 	});
 }, 20);
-
 var seed = 'http://www.haveeru.com.mv';
 q.push({url:seed}, function(err, res){
 	if(err){
@@ -119,9 +105,7 @@ q.push({url:seed}, function(err, res){
 	if(res.statusCode !== 200){
 		return io.emit('test', 'server returned !200 for resource: '+res.url);
 	}
-				
 	urls.push(res.url);
-				
 	if(res.exception === true){
 		return io.emit('test', 'could not determine if article for: '+res.url);
 	}
