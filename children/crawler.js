@@ -43,7 +43,7 @@ var q = async.queue(function(task,callback){
 		}
 		callback(null, response.statusCode);
 	});
-}, 20);
+}, 4);
 
 var url = 'http://www.haveeru.com.mv';
 q.push({url:url}, function(err, res){
