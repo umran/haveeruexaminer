@@ -28,7 +28,7 @@ var q = async.queue(function(task,callback){
 			if(!$(link).attr('href')){
 				return;
 			}
-    	//filter and format link
+			//filter and format link
 			if ($(link).attr('href').charAt(0) !== '/' && checkstring.test($(link).attr('href')) === false){
 				return;
 			}
@@ -36,7 +36,7 @@ var q = async.queue(function(task,callback){
 			if (link.charAt(0) === '/'){
 				link = prefix.concat(link);
 			}
-    	if(urls.indexOf(link) > -1){
+			if(urls.indexOf(link) > -1){
 				io.emit('test', '	duplicate prevented from joining queue');
 				return;
 			}
