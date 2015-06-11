@@ -9,15 +9,9 @@ html
 		script(type='text/javascript' src='/bootstrap/js/bootstrap.min.js')
 		script(type='text/javascript' src='/javascripts/main.js')
 	body
-		div(class='ui masthead segment' id='nav')
-			div(class='ui page grid')
-				div(class='column')
-					div(class='ui secondary menu')
-						div(class='header item' id='header')='judicialwatchmv.org'
-						div(class='right menu')
-							a(class='item')='Home'
-							a(class='item')='Reports'
-							a(class='item')='Archive'
-							a(class='item')='Data'
-							a(class='item')='Blog'
+		nav(class='navbar navbar-default')
+			div(class='container-fluid')
+				div(class='navbar-header')
+					a(class='navbar-brand', href='#')
+						img(alt='haveeruexaminer', src='...')
 		block content
