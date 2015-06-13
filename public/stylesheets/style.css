@@ -1,3 +1,8 @@
 .navbar-brand {
-	padding: 9px;
+	padding: 3px;
+}
+
+.navbar-default {
+    background-color: #9A9EA1;
+    border-color: #9A9EA1;
 }
