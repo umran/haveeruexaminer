@@ -24,6 +24,9 @@
     "request":"2.57.0",
     "cheerio":"0.19.0",
     "async":"1.2.0",
-    "v8-profiler":"5.2.9"
+    "v8-profiler":"5.2.9",
+    "crawler":"0.4.3",
+    "css-select":"0.4.1",
+    "css-what":"0.4.7"
   }
 }
