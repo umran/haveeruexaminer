@@ -1,3 +1,31 @@
 extends layout
 
 block content
+		div#bs-carousel(class='carousel fade-carousel slide' data-ride='carousel' data-interval='4000')
+			div(class='overlay')
+   				ol(class='carousel-indicators')
+   					li(data-target='#bs-carousel' data-slide-to='0' class='active')
+   					li(data-target='#bs-carousel' data-slide-to='1')
+   					li(data-target='#bs-carousel' data-slide-to='2')
+   				div(class='carousel-inner')
+   					div(class='item slides active')
+   						div(class='slide-1')
+   						div(class='hero')
+   							hgroup
+   								h1 We are creative
+   								h3 Get started on your next project
+   								button(class='btn btn-hero btn-lg' role='button') See all features
+					div(class='item slides')
+						div(class='slide-2')
+						div(class='hero')
+							hgroup
+								h1 We are smart
+								h3 Get started soon with our templates
+							button(class='btn btn-hero btn-lg' role='button') See all our templates
+					div(class='item slides')
+						div(class='slide-3')
+						div(class='hero')
+							hgroup
+								h1 We are amazing
+								h3 Get started with our expert advice
+								button(class='btn btn-hero btn-lg' role='buttton') Check with our best experts  							
