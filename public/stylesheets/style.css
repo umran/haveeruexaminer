@@ -1,2 +1,23 @@
-//changed
-//more changes
+.navbar {
+    border-radius: 0px;
+}
+
+.navbar-default {
+    background-color: #C33;
+    border-color: #C33;
+}
+
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.navbar-brand {
+    margin-left: 0px;
+}
+
+.navbar-brand {
+    height: 64px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
