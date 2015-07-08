@@ -10,6 +10,7 @@ var checkstring = new RegExp('(https?:\/\/haveeru\.com\.mv|https?:\/\/www\.havee
 var urls = [];
 
 var q = async.queue(function(task,callback){
+	
 	var url = task.url;
 	if(urls.indexOf(url) > -1){
 		return callback();
@@ -17,10 +18,12 @@ var q = async.queue(function(task,callback){
 	read(url, function(error, response, body){
 		if(error){
 			return callback();
+			global.gc();
 		}
 		if(response.statusCode !== 200){
 			io.emit('test', 'server returned !200 for resource: '+url);
 			return callback();
+			global.gc();
 		}
 		
 		//urls.push(url);
@@ -28,10 +31,12 @@ var q = async.queue(function(task,callback){
 		var $ = cheerio.load(body);
 		$($('a')).each(function(i, link){
 			if(!$(link).attr('href')){
+				link = null;
 				return;
 			}
 			//filter and format link
 			if ($(link).attr('href').charAt(0) !== '/' && checkstring.test($(link).attr('href')) === false){
+				link = null;
 				return;
 			}
 			link = $(link).attr('href');
@@ -40,9 +45,11 @@ var q = async.queue(function(task,callback){
 			}
 			if(urls.indexOf(link) > -1){
 				io.emit('test', '	duplicate prevented from joining queue');
+				link = null;
 				return;
 			}
 			q.push({url:'http://www.haveeru.com.mv/news/60869'});
+			link = null;
 		});
 		
 		//document processing
@@ -51,6 +58,7 @@ var q = async.queue(function(task,callback){
 			//release memory
 			$ = null;
 			return callback();
+			global.gc();
 		}
 		var until;
 		if($('.post-frame').find($('.related-articles')).length === 0){
@@ -60,6 +68,7 @@ var q = async.queue(function(task,callback){
 					//release memory
 					$ = null;
 					return callback();
+					global.gc();
 				}
 				else{
 					until = '.comments';
@@ -88,6 +97,7 @@ var q = async.queue(function(task,callback){
 		$ = null;
 		
 		callback();
+		global.gc();
 	});
 }, 20);
 var seed = 'http://www.haveeru.com.mv/news/60869';
