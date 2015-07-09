@@ -11,7 +11,6 @@ var passport = require('./dependencies/auth');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var uris = require('./routes/uris');
 var auth = require('./routes/auth');
 
 var app = express();
@@ -55,7 +54,6 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/polls', uris);
 app.use('/auth', auth);
 
 // catch 404 and forward to error handler

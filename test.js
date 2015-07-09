@@ -1,11 +1,19 @@
-var mongoose = require('mongoose');
+console.log(1);
 
-var Polls = require('./models/polls');
+console.log(2);
 
-mongoose.connect('mongodb://localhost/pollsdb');
+setTimeout(function(){
+	console.log(3);
+}, 5000);
 
-newPoll = new Polls({question: 'Do you trust the Government?', choices: [{choiceText: 'yes'}, {choiceText: 'no'}]});
-newPoll.save(function (err) {
-  if (err) return handleError(err);
-  // saved!
-})
+console.log(4);
+
+checkDB(value, function(){
+	console.log('done');
+});
+
+checkDB(value, callback);
+
+function callback(){
+	console.log('done');
+}
