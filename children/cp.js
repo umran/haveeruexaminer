@@ -76,7 +76,7 @@ read(jobUrl, function(error, response, body){
   			io.emit('test', 'unexpected database error occurred');
   			processed+=1;
 				if(processed >= operations){
-					io.emit('test', 'disconnect signal sent to db');
+					//io.emit('test', 'disconnect signal sent to db');
 					mongoose.disconnect();
 					client.disconnect();
 					io.close();
@@ -84,10 +84,10 @@ read(jobUrl, function(error, response, body){
   			return;
   		}
   		client.set(jobUrl,'done',function(){
-  			io.emit('test','state of current url set as done in redis');
+  			io.emit('test','state of current url, which is a duplicate set as done in redis');
   			processed+=1;
 				if(processed >= operations){
-					io.emit('test', 'disconnect signal sent to db');
+					//io.emit('test', 'disconnect signal sent to db');
 					mongoose.disconnect();
 					client.disconnect();
 					io.close();
@@ -95,25 +95,25 @@ read(jobUrl, function(error, response, body){
   		});
   		//io.emit('test', 'duplicate url was ignored by mongodb');
   		if(processed >= operations){
-				io.emit('test', 'disconnect signal sent to db');
+				//io.emit('test', 'disconnect signal sent to db');
 				mongoose.disconnect();
 				client.disconnect();
 				io.close();
 			}
   		return;
   	}
-  	io.emit('test', 'state of current url set as done in redis');
+  	io.emit('test', 'state of current url, which is new set as done in redis');
   	client.set(jobUrl,'done',function(){
   		processed+=1;
 			if(processed >= operations){
-				io.emit('test', 'disconnect signal sent to db');
+				//io.emit('test', 'disconnect signal sent to db');
 				mongoose.disconnect();
 				client.disconnect();
 				io.close();
 			}
   	});
   	if(processed >= operations){
-  		io.emit('test', 'disconnect signal sent to db');
+  		//io.emit('test', 'disconnect signal sent to db');
 			mongoose.disconnect();
 			client.disconnect();
 			io.close();
@@ -148,7 +148,7 @@ read(jobUrl, function(error, response, body){
 					subProcessed +=1;
 					processed += 1;
 					if(processed >= operations){
-						io.emit('test', 'disconnect signal sent to db');
+						//io.emit('test', 'disconnect signal sent to db');
 						mongoose.disconnect();
 						client.quit();
 						io.close();
@@ -172,7 +172,7 @@ read(jobUrl, function(error, response, body){
 					subProcessed +=1;
 					processed += 1;
 					if(processed >= operations){
-						io.emit('test', 'disconnect signal sent to db');
+						//io.emit('test', 'disconnect signal sent to db');
 						mongoose.disconnect();
 						client.quit();
 						io.close();
@@ -201,7 +201,7 @@ read(jobUrl, function(error, response, body){
 						subProcessed +=1;
 						processed += 1;
 						if(processed >= operations){
-							io.emit('test', 'disconnect signal sent to db');
+							//io.emit('test', 'disconnect signal sent to db');
 							mongoose.disconnect();
 							client.quit();
 							io.close();
@@ -226,7 +226,7 @@ read(jobUrl, function(error, response, body){
 						subProcessed +=1;
 						processed += 1;
 						if(processed >= operations){
-							io.emit('test', 'disconnect signal sent to db');
+							//io.emit('test', 'disconnect signal sent to db');
 							mongoose.disconnect();
 							client.quit();
 							io.close();
@@ -245,12 +245,12 @@ read(jobUrl, function(error, response, body){
 						
 					}
 					client.set(url, 'inq',function(){
-						//io.emit('test','new url was added to redis queue');
+						io.emit('test','new url was added to redis queue '+url);
 						//
 						subProcessed +=1;
 						processed += 1;
 						if(processed >= operations){
-							io.emit('test', 'disconnect signal sent to db');
+							//io.emit('test', 'disconnect signal sent to db');
 							mongoose.disconnect();
 							client.quit();
 							io.close();
@@ -271,7 +271,7 @@ read(jobUrl, function(error, response, body){
 				//subProcessed +=1;
 				//processed += 1;
 				if(processed >= operations){
-					io.emit('test', 'disconnect signal sent to db');
+					//io.emit('test', 'disconnect signal sent to db');
 					mongoose.disconnect();
 					client.quit();
 					io.close();
@@ -353,7 +353,7 @@ read(jobUrl, function(error, response, body){
 	newDoc.save(function (err) {
   	processed += 1;
   	if(processed >= operations){
-  		io.emit('test', 'disconnect signal sent to db');
+  		//io.emit('test', 'disconnect signal sent to db');
 			mongoose.disconnect();
 			client.quit();
 			io.close();
@@ -363,7 +363,7 @@ read(jobUrl, function(error, response, body){
   			io.emit('test', 'unexpected database error occurred');
   			return;
   		}
-  		io.emit('test', 'a duplicate url was detected and ignored');
+  		io.emit('test', 'a duplicate url was detected and ignored '+ doc.url);
   		return;
   	}
   	io.emit('test', doc.hash + ' saved in collection');

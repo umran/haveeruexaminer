@@ -6,7 +6,7 @@ var events = require('events');
 var eventEmitter = new events.EventEmitter();
 var queue = [];
 var count = 0;
-var workers = 5;
+var workers = 8;
 
 var redis = require('redis');
 var client = redis.createClient();
@@ -31,7 +31,7 @@ function cpCallback(err, stdout, stderr) {
 	
 	var next = queue.shift();
 	count+=1;
-	exec('node ./cp.js '+ next, cpCallback);
+	exec("node ./cp.js "+"'"+next+"'", cpCallback);
 	//console.log(next);
 }
 
@@ -52,6 +52,7 @@ function nextBatch(err,res){
 				}
 				if(res === 'done'){
 					//console.log('processed url ignored');
+					client.del(url);
 					return;
 				}
 				//console.log('new url added to queue');
@@ -67,11 +68,12 @@ function nextBatch(err,res){
 			return;
 		}
 
-		var next = queue.shift();
-
-		count+=1;
-		exec('node ./cp.js '+ next, cpCallback);
-		//console.log(next);
+		for(i=0; i < workers; i++){
+			var next = queue.shift();
+			count += 1;
+			exec("node ./cp.js "+"'"+next+"'", cpCallback);
+			//console.log(next);
+		}
 		return;
 	}
 	client.scan(cursor,nextBatch);
@@ -84,7 +86,7 @@ eventEmitter.on('empty',function(){
 
 for(i=0; i < workers; i++){
 	count += 1;
-	exec('node ./cp.js '+ seed, cpCallback);
+	exec("node ./cp.js "+"'"+seed+"'", cpCallback);
 
 	//console.log(seed);
 }

@@ -1,15 +1,12 @@
+/*navbar rules*/
+
 .navbar {
     border-radius: 0px;
 }
 
 .navbar-default {
-    background-color: #C33;
-    border-color: #C33;
-}
-
-.container-fluid {
-    margin-right: auto;
-    margin-left: auto;
+    background-color: #4078C0;
+    border-color: #4078C0;
 }
 
 .navbar-brand {
@@ -22,6 +19,71 @@
     padding-bottom: 16px;
 }
 
-body {
-    background-color: #197EC1
+.navbar-nav {
+	float:right;
+	height: 64px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.navbar-default .navbar-nav > li > a {
+	padding-top:8px;
+	padding-bottom:8px;
+}
+/*nav anchor rules*/
+
+.navbar-default .navbar-nav > li > a	{
+	color:rgba(255,255,255,0.5)
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+	color:#fff;
+	text-decoration:none
+}
+
+.navbar-nav .active{
+	color:#fff;
+	font-weight:500
+}
+
+/*collapsed navbar rules*/
+
+.navbar-default .navbar-collapse {
+	border:none;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+	border-color:#fff;
+  background-color: transparent;
+}
+
+.navbar-default .navbar-toggle {
+	padding:8px 10px;
+	margin-top:16px;
+	margin-botttom:0px;
+	border-radius:12px;
+	border-color:rgba(255,255,255,0.5);
+}
+
+.navbar-default .navbar-toggle .icon-bar{
+	background-color:rgba(255,255,255,0.5);
+}
+
+.navbar-default .navbar-toggle:focus .icon-bar, .navbar-default .navbar-toggle:hover .icon-bar {
+    background-color: #fff;
+}
+/* tweaked bootstrap */
+
+.form-control {
+	border:none;
+	box-shadow:none;
+	transition:none;
+}
+
+/*thaana class*/
+
+.thaana {
+	font-family: "Noto Sans Thaana";
+	direction: rtl;
+	
 }

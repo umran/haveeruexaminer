@@ -1,11 +1,6 @@
 var redis = require('redis');
 var client = redis.createClient();
 
-var done = 0;
-var inq = 0;
-var total;
-var progress;
-
 function nextBatch(err,res){
 	if(err){
 		console.log('unexpected redis error occurred');
@@ -21,12 +16,10 @@ function nextBatch(err,res){
 					console.log('unexpected redis error occurred');
 					return;
 				}
-				if(res === 'done'){
-					done += 1;
+				if(res === 'inq'){
 					return;
 				}
-				//console.log('new url added to queue');
-				inq += 1;
+				client.del(url);
 			});
 		});
 	}
@@ -34,11 +27,6 @@ function nextBatch(err,res){
 	if(cursor == 0){
 		console.log('database scan complete');
 		setTimeout(function() {
-    	total = done+inq;
-			progress = (done/total)*100;
-		
-			console.log(done+' out of '+total+' urls were checked');
-			console.log(progress+'% done');
 			client.quit();
 		}, 10000);
 		return;

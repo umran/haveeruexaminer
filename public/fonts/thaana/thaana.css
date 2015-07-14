@@ -1,0 +1,18 @@
+@font-face {
+  font-family: 'Noto Sans Thaana';
+  src: url('NotoSansThaana-Regular.ttf')format('truetype');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+
+
+
+@font-face {
+  font-family: 'Noto Sans Thaana';
+  src: url('NotoSansThaana-Bold.ttf')format('truetype');
+  font-weight: bold;
+  font-style: normal;
+
+}
