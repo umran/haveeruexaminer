@@ -6,6 +6,7 @@ var events = require('events');
 var eventEmitter = new events.EventEmitter();
 var queue = [];
 var count = 0;
+var lock = false;
 var workers = 8;
 
 var redis = require('redis');
@@ -18,9 +19,10 @@ function cpCallback(err, stdout, stderr) {
 	
 	if(queue.length === 0){
 		console.log('empty queue detected');
-		if(count>0){
+		if(lock === true){
 			return;
 		}
+		lock = true;
 		eventEmitter.emit('empty');
 		return;
 	}
@@ -62,18 +64,25 @@ function nextBatch(err,res){
 	}
 	
 	if(cursor == 0){
-		console.log('new batch has been fetched');
-		//do stuff and return
-		if(count >= workers || queue.length === 0){
-			return;
-		}
+		setTimeout(function() {
+			lock = false;
+			console.log('new batch has been fetched');
+			//do stuff and return
+			if(queue.length === 0){
+				console.log('seems like there are no more jobs available');
+				return;
+			}
 
-		for(i=0; i < workers; i++){
-			var next = queue.shift();
-			count += 1;
-			exec("node ./cp.js "+"'"+next+"'", cpCallback);
-			//console.log(next);
-		}
+			for(i=0; i < workers; i++){
+				if(count >= workers){
+					return;
+				}
+				var next = queue.shift();
+				count += 1;
+				exec("node ./cp.js "+"'"+next+"'", cpCallback);
+				//console.log(next);
+			}
+		}, 10000);
 		return;
 	}
 	client.scan(cursor,nextBatch);

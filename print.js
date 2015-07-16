@@ -1,8 +1,8 @@
 var read = require('request');
 var cheerio = require('cheerio');
 
-read('http://haveeru.com.mv/news/39347',function(err,res,body){
-	var $ = cheerio.load(body);
+read('http://haveeru.com.mv/news/37163',function(err,res,body){
+	var $ = cheerio.load(body, {normalizeWhitespace: true, xmlMode: true});
 	var until;
 	if($('.post-frame').find($('.related-articles')).length === 0){
 		if($('.post-frame').find($('.service-holder')).length === 0){
@@ -21,6 +21,8 @@ read('http://haveeru.com.mv/news/39347',function(err,res,body){
 	else{
 		until = '.related-articles';
 	}
-	var main = $('.intro','.post-frame').nextUntil(until).html();
-	console.log(main)
+	var main = $('.intro', '.post-frame').nextUntil(until).html();
+	console.log(main);
 });
+
+//

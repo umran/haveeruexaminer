@@ -2,37 +2,37 @@ doctype html
 html
 	head
 		title= title + ' · Haveeru Examiner'
-		link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+		//-link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
 		link(rel='stylesheet', href='/fonts/thaana/thaana.css')
 		link(rel='stylesheet', href='/fonts/font-awesome/css/font-awesome.min.css')
-		link(rel='stylesheet' href='/fonts/octicons/octicons.css')
-		link(rel='stylesheet', href='/stylesheets/style.css')
+		//-link(rel='stylesheet' href='/fonts/octicons/octicons.css')
+		link(rel='stylesheet', href='/stylesheets/primer.css')
+		link(rel='stylesheet', href='/stylesheets/haveeruexaminer.css')
 		script(type='text/javascript', src='/javascripts/jquery.min.js')
-		script(type='text/javascript', src='/bootstrap/js/bootstrap.min.js')
+		//-script(type='text/javascript', src='/bootstrap/js/bootstrap.min.js')
 		script(type='text/javascript', src='/javascripts/main.js')
 	body
-		//-div(class='navbar navbar-default navbar-fixed-top')
-			//-div(class='container')
-				//-div(class='navbar-header')
-					//-button(type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#menu' aria-expanded='false')
-						//-span(class='icon-bar')
-						//-span(class='icon-bar')
-						//-span(class='icon-bar')
-					//-a(class='navbar-brand')
-						//-img(alt='haveeruexaminer', src='/graphics/logo/logo-alt.svg')
-				//-div(class='collapse navbar-collapse' id='menu')
-					//-ul(class='nav navbar-nav')
-						//-li()
-							//-a(href='/')
-								//-span(class='octicon octicon-database')
-								//-|	Data
-						//-li()
-							//-a(href='/')
-								//-span(class='octicon octicon-tools')
-								//-|	API
-						//-li()
-							//-a(href='/', class='nav-link')
-								//-span(class='octicon octicon-info')
-								//-|	Usage
-		
+		header(class='masthead')
+			div(class='container')
+				a(class='masthead-logo')
+					img(class='logo-image' src='/graphics/logo/logo-alt24.svg')
+				nav(class='masthead-nav')
+					a(href='/')
+						span(class='octicon octicon-database')
+						|	Database
+					a(href='/')
+						span(class='octicon octicon-pulse')
+						|	Analytics
+					a(href='/')
+						span(class='octicon octicon-code')
+						|	API
+					a(href='/')
+						span(class='octicon octicon-info')
+						|	Usage
+		div(class='jumbotron')
+			div(class='container')
+				h1(class='thaana')
+					|ހަވީރު އެގްޒާމިނާ
+				p(class='thaana')
+					|ހަވީރުގެ އިންޓެގްރިޓީ ބަލަހައްޓައިދޭ އެޕެއް
 		block content

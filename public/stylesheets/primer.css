@@ -1,4 +1,5 @@
-/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */@import url(bower_components/octicons/octicons/octicons.css);
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+@import url(/fonts/octicons/octicons.css);
 html{
 	font-family:sans-serif;
 	-webkit-text-size-adjust:100%;
@@ -2762,7 +2763,7 @@ body{
 	padding-bottom:1rem;
 	margin-bottom:1.5rem;
 	text-align:center;
-	background-color:#4078c0
+	background-color:#F25D31
 }
 
 .masthead a{
@@ -2776,8 +2777,8 @@ body{
 
 .masthead .masthead-logo{
 	display:inline-block;
-	font-size:1.5rem;
-	color:#fff
+	/*font-size:1.5rem;*/
+	color:rgba(255,255,255,0.5)
 }
 
 .masthead .masthead-logo .mega-octicon{
@@ -2798,7 +2799,7 @@ body{
 
 .masthead-nav{
 	margin-top:1rem;
-	font-size:1rem
+	font-size:0.75rem
 }
 
 .masthead-nav a{
@@ -2835,9 +2836,9 @@ body{
 	margin-bottom:3rem;
 	padding-top:2rem;
 	padding-bottom:4rem;
-	background-color:#4078c0;
+	background-color:#F25D31;
 	font-size:1.25rem;
-	color:#fff;
+	color:rgba(255,255,255,0.5);
 	text-align:center
 }
 
@@ -2858,7 +2859,7 @@ body{
 		padding-top:6rem;
 		padding-bottom:8rem;
 		font-size:1.5rem;
-		text-align:left
+		/*text-align:left*/
 	}
 
 }

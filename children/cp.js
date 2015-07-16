@@ -43,7 +43,7 @@ read(jobUrl, function(error, response, body){
 		return;
 	}
 	
-	var $ = cheerio.load(body);
+	var $ = cheerio.load(body, {normalizeWhitespace: true, xmlMode: true});
 	$($('a')).each(function(i, link){
 		if(!$(link).attr('href')){
 			return;
@@ -245,7 +245,7 @@ read(jobUrl, function(error, response, body){
 						
 					}
 					client.set(url, 'inq',function(){
-						io.emit('test','new url was added to redis queue '+url);
+						//io.emit('test','new url was added to redis queue '+url);
 						//
 						subProcessed +=1;
 						processed += 1;
@@ -343,7 +343,7 @@ read(jobUrl, function(error, response, body){
 	doc.title = $('h1', '.post').text();
 	doc.byline = $('.subttl', '.post').text();
 	doc.date = $('.date', '.post').text();
-	doc.intro = $('.intro','.post-frame').html();
+	doc.intro = $('.intro','.post-frame').text();
 	doc.main = $('.intro','.post-frame').nextUntil(until).html();
 	//calculate document hash
 	doc.hash = crypto.createHash('sha256').update(doc.url.concat(doc.title,doc.byline,doc.date,doc.intro,doc.main)).digest('hex');
