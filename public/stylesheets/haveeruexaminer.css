@@ -1,4 +1,5 @@
-@import url(/stylesheets/primer.css);
+@import url(/stylesheets/primer-bootstrap.css);
+
 .thaana {
 	font-family: 'Noto Sans Thaana';
 	direction: rtl;

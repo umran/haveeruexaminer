@@ -1,5 +1,5 @@
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
-@import url(/primer-css/css/primer.css)
+@import url(/primer-css/css/primer.css);
 @import url(/fonts/octicons/octicons.css);
 html{
 	font-family:sans-serif;
