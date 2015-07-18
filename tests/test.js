@@ -11,8 +11,8 @@ function nextBatch(err,res){
 		console.log('unexpected redis error occurred');
 		return;
 	}
-	cursor = res[0];
-	batch = res[1];
+	var cursor = res[0];
+	var batch = res[1];
 	
 	if(batch.length > 0){
 		batch.forEach(function(url){

@@ -63,7 +63,6 @@ read(jobUrl, function(error, response, body){
 	io.emit('test', 'current: '+jobUrl);
 	
 	//beyond this point, url must be marked as seen by the crawler
-	//client.set(jobUrl,'done');
 	
 	//just making sure we're keeping an eye on all the asynchronous db calls
 	operations += newUrls.length + 2;
@@ -74,6 +73,17 @@ read(jobUrl, function(error, response, body){
   	if (err){
   		if(err.code !== 11000){
   			io.emit('test', 'unexpected database error occurred');
+  			processed+=1;
+				if(processed >= operations){
+					//io.emit('test', 'disconnect signal sent to db');
+					mongoose.disconnect();
+					client.disconnect();
+					io.close();
+				}
+  			return;
+  		}
+  		if(jobUrl == 'http://www.haveeru.com.mv/' || jobUrl == 'http://www.haveeru.com.mv/dhivehi/'){
+  			io.emit('test', 'seeding...');
   			processed+=1;
 				if(processed >= operations){
 					//io.emit('test', 'disconnect signal sent to db');

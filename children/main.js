@@ -12,9 +12,7 @@ var workers = 8;
 var redis = require('redis');
 var client = redis.createClient();
 
-var seed = 'http://haveeru.com.mv';
 
-function cpCallback(err, stdout, stderr) {
 	count -= 1;
 	
 	if(queue.length === 0){
@@ -69,10 +67,8 @@ function nextBatch(err,res){
 			console.log('new batch has been fetched');
 			//do stuff and return
 			if(queue.length === 0){
-				console.log('seems like there are no more jobs available');
 				return;
 			}
-
 			for(i=0; i < workers; i++){
 				if(count >= workers){
 					return;
@@ -95,7 +91,6 @@ eventEmitter.on('empty',function(){
 
 for(i=0; i < workers; i++){
 	count += 1;
-	exec("node ./cp.js "+"'"+seed+"'", cpCallback);
 
 	//console.log(seed);
 }
