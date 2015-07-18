@@ -1,10 +1,9 @@
-require('v8-profiler');
-var client = require('socket.io-client');
-var io = client.connect('http://localhost:3000');
+var async = require('async');
 var exec = require('child_process').exec;
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
 var queue = [];
+var calls;
 var count = 0;
 var lock = false;
 var workers = 8;
@@ -12,12 +11,14 @@ var workers = 8;
 var redis = require('redis');
 var client = redis.createClient();
 
+var seeds = ['http://www.haveeru.com.mv/','http://www.haveeru.com.mv/dhivehi/'];
 
+function cpCallback(err, stdout, stderr){
 	count -= 1;
 	
 	if(queue.length === 0){
 		console.log('empty queue detected');
-		if(lock === true){
+		if(lock === true || count>0){
 			return;
 		}
 		lock = true;
@@ -32,7 +33,6 @@ var client = redis.createClient();
 	var next = queue.shift();
 	count+=1;
 	exec("node ./cp.js "+"'"+next+"'", cpCallback);
-	//console.log(next);
 }
 
 function nextBatch(err,res){
@@ -44,29 +44,45 @@ function nextBatch(err,res){
 	var batch = res[1];
 	
 	if(batch.length > 0){
+		//put redis operations in a parallel queue
 		batch.forEach(function(url){
-			client.get(url,function(err,res){
-				if(err){
-					console.log('unexpected redis error occurred');
-					return;
-				}
-				if(res === 'done'){
-					//console.log('processed url ignored');
-					client.del(url);
-					return;
-				}
-				//console.log('new url added to queue');
-				queue.push(url);
+			calls.push(function(callback){
+				client.get(url, function(err,res){
+					if(err){
+						callback(null, 'unexpected redis error occurred');
+						return;
+					}
+					if(res === 'done'){
+						client.del(url, function(err,res){
+							if(err){
+								callback(null, 'unexpected redis error occurred');
+								return;
+							}
+							callback(null, 'done url ignored');
+							return;						
+						});
+						return;
+					}
+					queue.push(url);
+					callback(null, 'new url added to queue');
+				});
 			});
 		});
 	}
 	
 	if(cursor == 0){
-		setTimeout(function() {
-			lock = false;
+		//execute redis operations and do stuff when all operations have called back
+		async.parallel(calls, function(err, result) {
+    	if(err){
+    		console.log('an unexpected error occurred in processing the new batch, quitting...');
+    		client.quit();
+    		return;
+    	}
+    	lock = false;
 			console.log('new batch has been fetched');
-			//do stuff and return
 			if(queue.length === 0){
+				console.log('seems like there are no more jobs available, quitting');
+				client.quit();
 				return;
 			}
 			for(i=0; i < workers; i++){
@@ -76,21 +92,21 @@ function nextBatch(err,res){
 				var next = queue.shift();
 				count += 1;
 				exec("node ./cp.js "+"'"+next+"'", cpCallback);
-				//console.log(next);
 			}
-		}, 10000);
+		});
 		return;
 	}
 	client.scan(cursor,nextBatch);
 }
 
 eventEmitter.on('empty',function(){
-	console.log('fetching new batch from redis')
+	calls = [];
+	console.log('fetching new batch from redis');
 	client.scan(0,nextBatch);
 });
 
 for(i=0; i < workers; i++){
+	var alternator = i%2;
 	count += 1;
-
-	//console.log(seed);
+	exec("node ./cp.js "+"'"+seeds[alternator]+"'", cpCallback);
 }
