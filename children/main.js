@@ -81,8 +81,10 @@ function nextBatch(err,res){
     	lock = false;
 			console.log('new batch has been fetched');
 			if(queue.length === 0){
-				console.log('seems like there are no more jobs available, quitting');
-				client.quit();
+				console.log('seems like there are no more jobs available, quitting with a delay of 5 minutes');
+				setTimeout(function(){
+					client.quit();
+				}, 10000);
 				return;
 			}
 			for(i=0; i < workers; i++){

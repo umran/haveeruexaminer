@@ -13,11 +13,15 @@ function queueAdd(){
 		count += 1;
 		queue.push(count.toString());
 		queueAdd();
-	},1000);
+	},1);
 }
 
 eventEmitter.on('next', function (){
-	console.log(queue.shift());
+	queue.shift();
+	//print something every second
+	if(count % 500 === 0){
+		console.log(count.toString());
+	}
 });
 
 queueAdd();

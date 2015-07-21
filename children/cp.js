@@ -10,7 +10,7 @@ var document = require('../models/doc');
 var record = require('../models/url');
 var redis = require('redis');
 
-var redis = require("redis")
+var redis = require("redis");
 var client = redis.createClient();
 
 var prefix = 'http://haveeru.com.mv';
