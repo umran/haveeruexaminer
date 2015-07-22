@@ -1,9 +1,9 @@
-var conveyor = require('./conveyor.js');
+var conveyor = require('../modules/conveyor.js');
 var belt = new conveyor('./testc.js', 2);
-var scanner = require('./scanner.js');
+var scanner = require('../modules/scanner.js');
 var scan = new scanner();
 
-belt.process(['hello','amiga','fuck off','noordhuis','kellerkind','alien'], function(err, res){
+belt.process(['hello','amiga','fpls','noordhuis','kellerkind','alien'], function(err, res){
 	if(err){
 		console.log(err);
 	}

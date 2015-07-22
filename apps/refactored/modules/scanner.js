@@ -1,5 +1,5 @@
 var async = require('async');
-var client = require('./shared.js');
+var client = require('../shared/redis_client.js');
 
 module.exports = function(){
 	this.fetch = function(callback){
