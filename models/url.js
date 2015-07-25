@@ -4,6 +4,6 @@ var urlSchema = new mongoose.Schema({
 	url: {type: String, unique: true, required: true}
 });
 
-var url = mongoose.model('url', urlSchema);
+var Url = mongoose.model('Url', urlSchema);
 
-module.exports = url;
+module.exports = Url;

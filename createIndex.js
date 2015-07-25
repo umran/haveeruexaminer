@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var mongoosastic = require('mongoosastic');
+mongoose.connect('mongodb://localhost/dummy');
 
 var docSchema = new mongoose.Schema({
 	url: {type: String, unique: true, required: true},
@@ -16,4 +17,21 @@ docSchema.plugin(mongoosastic);
 
 var Doc = mongoose.model('Doc', docSchema);
 
-module.exports = Doc;
+Doc.createMapping({
+"analysis" : {
+    "analyzer":{
+      "content":{
+        "type":"custom",
+        "tokenizer":"whitespace"
+      }
+    }
+  }
+},function(err, mapping){
+	if(err){
+		console.log(err);
+		mongoose.disconnect();
+		return;
+	}
+	console.log('Done');
+	mongoose.disconnect();
+});

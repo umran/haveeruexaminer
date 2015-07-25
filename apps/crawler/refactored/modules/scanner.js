@@ -1,5 +1,5 @@
 var async = require('async');
-var client = require('../shared/redis_client.js');
+var client = require('../shared/redisClient.js');
 
 module.exports = function(){
 	this.fetch = function(callback){
@@ -22,7 +22,7 @@ module.exports = function(){
 				calls.push(function(callback){
 					client.get(url, function(err,res){
 						if(err){
-							callback(null, 'unexpected redis error occurred');
+							callback(err);
 							return;
 						}
 						if(res === 'inq'){
@@ -41,8 +41,8 @@ module.exports = function(){
 				});
 			});
 	
-			if(cursor == 0){
-				async.parallel(calls, function(err, res) {
+			if(cursor === '0'){
+				async.parallel(calls, function(err) {
 					if(err){
 						callback(err);
 						return;
