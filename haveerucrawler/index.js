@@ -1,4 +1,4 @@
-var client = require('./shared/redisClient.js');
+var client = require('./modules/shared/redisClient.js');
 var conveyor = require('./modules/conveyor.js');
 var belt = new conveyor('./worker.js', 8);
 var scanner = require('./modules/scanner.js');

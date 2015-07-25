@@ -1,12 +1,14 @@
+var config = require('./config.js');
 var async = require('async');
 var read = require('request');
 var cheerio = require('cheerio');
 var crypto = require('crypto');
 var mongoose = require('mongoose');
-var document = require('../../../models/doc');
-var record = require('../../../models/url');
+var document = require('./models/doc');
+var record = require('./models/url');
+var redisConfig = config.redis;
 var redis = require('redis');
-var client = redis.createClient();
+var client = redis.createClient(redisConfig.port, redisConfig.host);
 
 var prefix = 'http://haveeru.com.mv';
 var checkstring = new RegExp('(http:\/\/haveeru\.com\.mv|http:\/\/www\.haveeru\.com\.mv)');
@@ -16,7 +18,7 @@ var until;
 var jobUrl = process.argv[2].toString();
 
 //connect to mongodb
-mongoose.connect('mongodb://localhost/dummy');
+mongoose.connect(config.mongoServer);
 
 var queries = [];
 

@@ -1,6 +1,7 @@
+var config = require('./config.js');
 var mongoose = require('mongoose');
 var mongoosastic = require('mongoosastic');
-mongoose.connect('mongodb://localhost/dummy');
+mongoose.connect(config.mongoServer);
 
 var docSchema = new mongoose.Schema({
 	url: {type: String, unique: true, required: true},
@@ -13,7 +14,9 @@ var docSchema = new mongoose.Schema({
   hash: {type: String, required: true}
 });
 
-docSchema.plugin(mongoosastic);
+docSchema.plugin(mongoosastic, {
+	hosts: config.elasticServer
+});
 
 var Doc = mongoose.model('Doc', docSchema);
 
@@ -32,6 +35,6 @@ Doc.createMapping({
 		mongoose.disconnect();
 		return;
 	}
-	console.log('Done');
+	console.log('new elasticsearch index called docs created');
 	mongoose.disconnect();
 });
