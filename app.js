@@ -42,7 +42,11 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
+
+//setup logging
+var accessLogStream = fs.createWriteStream(__dirname + '/logs/access.log', {flags: 'a'});
+app.use(logger('combined', {stream: accessLogStream}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
