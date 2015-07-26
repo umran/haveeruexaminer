@@ -3,6 +3,7 @@ var app = require('../app');
 var http = require('http');
 
 // define http and socket.io port
+var address = '127.0.0.1';
 var port = '3080';
 app.set('port', port);
 
@@ -11,7 +12,7 @@ var server = http.createServer(app);
 var io = require('socket.io')(server);
 
 // start http and socket.io server
-server.listen(port);
+server.listen(port, address);
 
 //pass io object to io module
 require('./io')(io);
