@@ -9,5 +9,9 @@ module.exports = function(io){
 			socket.to('clients').emit('update', data);
 			//console.log(data);
 		});
+		socket.on('exception', function(data){
+			socket.to('clients').emit('exception', data);
+			//console.log(data);
+		});
 	});
 }
