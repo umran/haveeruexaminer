@@ -2764,7 +2764,7 @@ body{
 	padding-bottom:1rem;
 	margin-bottom:1.5rem;
 	text-align:center;
-	background-color:#F25D31
+	background-color:#4078C0
 }
 
 .masthead a{
@@ -2827,17 +2827,17 @@ body{
 @media (min-width: 34em){
 	.masthead-nav{
 		float:right;
-		margin-top:.5rem
+		margin-top:.35rem
 	}
 
 }
 
 .jumbotron{
 	margin-top:-2rem;
-	margin-bottom:3rem;
+	margin-bottom:2rem;
 	padding-top:2rem;
 	padding-bottom:4rem;
-	background-color:#F25D31;
+	background-color:#4078C0;
 	font-size:1.25rem;
 	color:rgba(255,255,255,0.5);
 	text-align:center
@@ -2848,18 +2848,11 @@ body{
 	font-weight:normal
 }
 
-.jumbotron .btn{
-	padding:.75em 1.15em;
-	font-size:inherit;
-	font-weight:normal;
-	line-height:1
-}
-
 @media (min-width: 34em){
 	.jumbotron{
 		padding-top:6rem;
 		padding-bottom:8rem;
-		font-size:1.5rem;
+		font-size:1.25rem;
 		/*text-align:left*/
 	}
 

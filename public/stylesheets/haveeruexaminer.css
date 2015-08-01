@@ -1,6 +1,24 @@
 @import url(/stylesheets/primer-bootstrap.css);
 
 .thaana {
-	font-family: 'Noto Sans Thaana';
+	/*font-family: 'Noto Sans Thaana';*/
 	direction: rtl;
+}
+
+.group {
+	padding-top:10px;
+}
+
+.next {
+	margin-left:10px;
+}
+
+.normalize {
+	font-size:0.75em;
+}
+
+.hash {
+	white-space: nowrap;
+  overflow: hidden;
+	text-overflow: ellipsis;
 }

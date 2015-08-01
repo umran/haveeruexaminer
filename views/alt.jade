@@ -1,0 +1,31 @@
+doctype html
+html
+	head
+		<meta charset="UTF-8">
+		title= title + ' · Haveeru Examiner'
+		link(rel='stylesheet', href='/fonts/thaana/thaana.css')
+		link(rel='stylesheet', href='/fonts/octicons/octicons.css')
+		link(rel='stylesheet', href='/fonts/font-awesome/css/font-awesome.min.css')
+		link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.0.7/semantic.min.css')
+		script(type='text/javascript', src='/socket.io/socket.io.js')
+		script(type='text/javascript', src='/javascript/angular.min.js')
+		script(type='text/javascript', src='/javascript/app/services.js')
+		script(type='text/javascript', src='/javascript/app/main.js')
+	body(ng-app='main')
+		div(class='ui menu')
+			div(class='ui container')
+				div(class='header item')
+					img(src='/graphics/logo/logo-alt24.svg')
+				div(class='right menu')
+					a(class='item')
+						span(class='octicon octicon-database')
+						|Repository
+					a(class='item')
+						span(class='octicon octicon-pulse')
+						|Analytics
+					a(class='item')
+						span(class='octicon octicon-code')
+						|API
+					a(class='item')
+						span(class='octicon octicon-mark-github')
+						|GitHub

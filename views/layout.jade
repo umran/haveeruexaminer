@@ -3,20 +3,22 @@ html
 	head
 		<meta charset="UTF-8">
 		title= title + ' · Haveeru Examiner'
-		link(rel='stylesheet', href='/fonts/thaana/thaana.css')
 		link(rel='stylesheet', href='/fonts/font-awesome/css/font-awesome.min.css')
+		link(rel='stylesheet', href='/fonts/thaana/thaana.css')
+		link(rel='stylesheet', href='/stylesheets/semantic/dist/semantic.min.css')
 		link(rel='stylesheet', href='/stylesheets/haveeruexaminer.css')
-		script(type='text/javascript', src='/javascripts/jquery.min.js')
-		script(type='text/javascript', src='/javascripts/main.js')
-	body
+		script(type='text/javascript', src='/socket.io/socket.io.js')
+		script(type='text/javascript', src='/javascript/angular.min.js')
+		script(type='text/javascript', src='/javascript/app/bower_components/moment/min/moment.min.js')
+		script(type='text/javascript', src='/javascript/app/bower_components/angular-moment/angular-moment.min.js')
+		script(type='text/javascript', src='/javascript/app/services.js')
+		script(type='text/javascript', src='/javascript/app/main.js')
+	body(ng-app='main')
 		header(class='masthead')
 			div(class='container')
 				a(class='masthead-logo')
 					img(class='logo-image' src='/graphics/logo/logo-alt24.svg')
 				nav(class='masthead-nav')
-					a(href='/')
-						span(class='octicon octicon-database')
-						|	Repository
 					a(href='/')
 						span(class='octicon octicon-pulse')
 						|	Analytics
@@ -25,5 +27,5 @@ html
 						|	API
 					a(href='https://github.com/umran/haveerucrawler')
 						span(class='octicon octicon-mark-github')
-						|	GitHub
+						|	Github
 	block content
