@@ -22,6 +22,20 @@ router.get('/:query/:page', function(req, res, next) {
           _all: userQuery
         }
       },
+      aggs: {
+      	r_title: {
+        	terms: {
+          	field: 'r_title'
+          },
+          aggs: {
+          	r_intro: {
+            	terms: {
+              	field: 'r_intro'
+              }
+          	}
+          }
+        }
+    	},
       highlight: {
         order: 'score',
         fields: {
