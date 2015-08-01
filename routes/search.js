@@ -23,16 +23,9 @@ router.get('/:query/:page', function(req, res, next) {
         }
       },
       aggs: {
-      	r_title: {
+      	dup_filter: {
         	terms: {
-          	field: 'r_title'
-          },
-          aggs: {
-          	r_intro: {
-            	terms: {
-              	field: 'r_intro'
-              }
-          	}
+          	field: 'dup_filter'
           }
         }
     	},
