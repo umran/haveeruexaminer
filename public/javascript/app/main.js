@@ -20,7 +20,7 @@ main
 						return;
 					}
 					
-					var meta = data.meta;
+					var meta = data.response.meta;
 					var results = data.response.items;
 					
 					Scopes.store('meta', meta);
