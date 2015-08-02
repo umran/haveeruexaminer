@@ -5,7 +5,10 @@ main
 		$http.get('/getrecent').
 			success(function(data, status, headers, config){
 				data.response.forEach(function(record){
-					$scope.updates.push(record.hash);
+					$scope.updates.push({
+						data: record.hash
+						time: record.timestamp
+					});
 				});
 			}).
 			error(function(data, status, headers, config){
