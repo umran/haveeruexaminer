@@ -26,3 +26,7 @@
 .ui.list>.item {
 	padding-bottom: 30px; 
 }
+
+.ui.list>.item .description {
+	padding-top: 5px;
+}
