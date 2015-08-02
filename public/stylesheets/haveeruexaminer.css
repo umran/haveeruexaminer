@@ -23,6 +23,6 @@
 	text-overflow: ellipsis;
 }
 
-.separated {
-	padding-bottom: 30px;
+.ui.list>.item {
+	padding-bottom: 30px; 
 }
