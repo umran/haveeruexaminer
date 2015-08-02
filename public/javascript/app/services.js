@@ -49,8 +49,12 @@ main.directive('ngEnter', function() {
 	};
 });
 
-main.filter('html', ['$sce', function ($sce) { 
-  return function (text) {    
+main.filter('excerpt_html', ['$sce', function ($sce) { 
+  return function (highlight) {
+  	
+  	var aggregate = highlight.r_intro.concat(highlight.fulltext);
+		var text = aggregate.join('... ');
+    
     return $sce.trustAsHtml(text);
   };    
-}]);
+}])
