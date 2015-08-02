@@ -22,13 +22,6 @@ router.get('/:query/:page', function(req, res, next) {
           _all: userQuery
         }
       },
-      aggs: {
-      	dup_filter: {
-        	terms: {
-          	field: 'dup_filter'
-          }
-        }
-    	},
       highlight: {
         order: 'score',
         pre_tags: ['<strong>'],
@@ -49,10 +42,39 @@ router.get('/:query/:page', function(req, res, next) {
     	}));
     	return;
   	}
+  	
+  	//parse results
+  	var pretty = {};
+  	
+  	//get query meta data
+  	pretty.meta = {};
+  	pretty.meta.time = response.took;
+  	pretty.meta.hits = response.hits.total;
+  	
+  	pretty.items = [];
+  	var results = response.hits.hits
+  	results.forEarch(function(result){
+  		var item = {};
+  		item.title = result._source.r_title;
+  		
+  		//prepare excerpt
+  		if(result.highlight.r_intro && result.highlight.fulltext){
+  			var aggregate = result.highlight.r_intro.concat(result.highlight.fulltext);
+  			var excerpt = aggregate.join('... ');
+  		} else if(result.highlight.r_intro){
+  			var excerpt = result.highlight.r_intro.join('... ');
+  		} else{
+  			var excerpt = result.highlight.fulltext.join('... ');
+  		}
+  		
+  		item.excerpt = excerpt;
+  		pretty.items.push(item);
+  	});
+  	
   	res.setHeader('Content-Type', 'application/json');
   	res.send(JSON.stringify({
   		code: 1,
-  		response: response
+  		response: pretty
   	}));
 	});
 });
