@@ -22,7 +22,7 @@ block content
 							a(class='header')
 								|{{result._source.r_title}}
 							div(class='description normalize')
-								p(ng-bind-html-unsafe='result.highlight.fulltext[0]')
+								p(ng-bind-html='result.highlight.fulltext[0] | html')
 			div(class='one-third column' ng-controller='crawlerFeed')
 				h4
 					|Recently Indexed
