@@ -14,14 +14,14 @@ block content
 	div(class='container')
 		div(class='columns')
 			div(class='column' ng-controller='searchResults')
-				h4
+				h4(class='thaana')
 					|{{meta}}
 				div(class='ui list')
 					div(class='item' ng-repeat='result in results')
 						div(class='content')
 							a(class='header thaana')
 								|{{result.title}}
-							div(class='description normalize')
+							div(class='description')
 								p(ng-bind-html='result.excerpt | html' class='thaana')
 		div(class='columns')
 			div(class='one-third column' ng-controller='crawlerFeed')
