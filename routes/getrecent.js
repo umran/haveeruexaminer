@@ -19,7 +19,7 @@ router.get('/', function(req, response, next) {
 		res.forEach(function(record){
 			var item = {};
 			item.hash = record.hash;
-			item.timestamp = Date.parse(record._id.getTimestamp())/1000;
+			item.timestamp = Date.parse(record._id.getTimestamp());
 			pretty.push(item);
 		});
 		
