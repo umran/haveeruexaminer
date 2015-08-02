@@ -17,7 +17,7 @@ block content
 				h4
 					|{{meta}}
 				div(class='ui list')
-					div(class='item' ng-repeat='result in results')
+					div(class='item' ng-repeat='result in results' ng-bind-html-unsafe='results.highlight.fulltext[0]')
 						div(class='content')
 							a(class='header')
 								|{{result._source.r_title}}
