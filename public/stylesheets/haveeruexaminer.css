@@ -23,10 +23,10 @@
 	text-overflow: ellipsis;
 }
 
-.result-item {
-	padding-bottom: 30px !important; 
+.ui.list>.result-item {
+	padding-bottom: 30px; 
 }
 
-.result-description {
+.ui.list>.result-item .result-description {
 	padding-top: 5px;
 }
