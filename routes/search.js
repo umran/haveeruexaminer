@@ -31,6 +31,8 @@ router.get('/:query/:page', function(req, res, next) {
     	},
       highlight: {
         order: 'score',
+        pre_tags: ['<strong>'],
+        post_tags: ['</strong>'],
         fields: {
           r_intro: {fragment_size: 150, number_of_fragments: 0},
           fulltext: {fragment_size: 150, number_of_fragments: 3}
