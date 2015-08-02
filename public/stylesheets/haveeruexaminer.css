@@ -23,7 +23,7 @@
 	text-overflow: ellipsis;
 }
 
-.ui.list>.item .result-item {
+.result-item {
 	padding-bottom: 30px; 
 }
 
