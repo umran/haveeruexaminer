@@ -19,10 +19,10 @@ block content
 				div(class='ui list')
 					div(class='item' ng-repeat='result in results')
 						div(class='content')
-							a(class='header')
+							a(class='header thaana')
 								|{{result.title}}
 							div(class='description normalize')
-								p(ng-bind-html='result.excerpt | html')
+								p(ng-bind-html='result.excerpt | html' class='thaana')
 			div(class='one-third column' ng-controller='crawlerFeed')
 				h4
 					|Recently Indexed
