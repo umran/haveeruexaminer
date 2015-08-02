@@ -20,10 +20,8 @@ main
 						return;
 					}
 					
-					var meta = {};
-					meta.took = data.response.took;
-					meta.hits = data.response.hits.total;
-					var results = data.response.hits.hits;
+					var meta = data.meta;
+					var results = data.response.items;
 					
 					Scopes.store('meta', meta);
 					Scopes.store('results', results);
@@ -35,9 +33,9 @@ main
 	})
 	.controller('searchResults', function($scope, Scopes){
 		$scope.$watch(function () { return Scopes.get('meta'); }, function (newValue, oldValue) {
-        if (newValue !== oldValue) $scope.meta = 'fetched '+newValue.hits+' documents in '+(newValue.took/1000)+' seconds ';
+      if (newValue !== oldValue) $scope.meta = 'fetched '+newValue.hits+' documents in '+(newValue.time/1000)+' seconds ';
     });
 		$scope.$watch(function () { return Scopes.get('results'); }, function (newValue, oldValue) {
-        if (newValue !== oldValue) $scope.results = newValue;
+      if (newValue !== oldValue) $scope.results = newValue;
     });
 	});

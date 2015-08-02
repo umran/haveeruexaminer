@@ -20,9 +20,9 @@ block content
 					div(class='item' ng-repeat='result in results')
 						div(class='content')
 							a(class='header')
-								|{{result._source.r_title}}
+								|{{result.title}}
 							div(class='description normalize')
-								p(ng-bind-html='result.highlight | excerpt_html')
+								p(ng-bind-html='result.excerpt | html')
 			div(class='one-third column' ng-controller='crawlerFeed')
 				h4
 					|Recently Indexed
