@@ -24,16 +24,16 @@ main.factory('socket', function ($rootScope) {
 });
 
 main.factory('Scopes', function ($rootScope) {
-    var mem = {};
+  var mem = {};
  
-    return {
-        store: function (key, value) {
-            mem[key] = value;
-        },
-        get: function (key) {
-            return mem[key];
-        }
-    };
+  return {
+    store: function (key, value) {
+      mem[key] = value;
+    },
+    get: function (key) {
+      return mem[key];
+    }
+  };
 });
 
 main.directive('ngEnter', function() {
