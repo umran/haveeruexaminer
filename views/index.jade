@@ -14,26 +14,24 @@ block content
 	div(class='container')
 		div(class='columns')
 			div(class='two-thirds column' ng-controller='searchResults')
-				div(class='ui segment')
-					h4
-						|{{meta}}
-					div(class='ui list')
-						div(class='item result-item' ng-repeat='result in results')
-							div(class='content')
-								a(class='header')
-									|{{result.title}}
-								div(class='description result-description')
-									p(ng-bind-html='result.excerpt | html')
+				h4
+					|{{meta}}
+				div(class='ui list')
+					div(class='item result-item' ng-repeat='result in results')
+						div(class='content')
+							a(class='header')
+								|{{result.title}}
+							div(class='description result-description')
+								p(ng-bind-html='result.excerpt | html')
 			div(class='one-third column' ng-controller='crawlerFeed')
-				div(class='ui segment')
-					h4
-						i(class='fa fa-clock-o')
-						|	Recently Indexed
-					div(class='ui list')
-						div(class='item normalize' ng-repeat='item in updates')
-							div(class='content')
-								a(class='header hash')
-									|{{item.data}}
-								div(class='description')
-									span(am-time-ago='item.time')
-									span(am-time-ago="message.time" am-preprocess="unix")
+				h4
+					i(class='fa fa-clock-o')
+					|	Recently Indexed
+				div(class='ui list')
+					div(class='item normalize' ng-repeat='item in updates')
+						div(class='content')
+							a(class='header hash')
+								|{{item.data}}
+							div(class='description')
+								span(am-time-ago='item.time')
+								span(am-time-ago="message.time" am-preprocess="unix")
