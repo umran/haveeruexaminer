@@ -13,7 +13,7 @@ block content
 						|toggle keyboard
 	div(class='container')
 		div(class='columns')
-			div(class='two-thirds column' ng-controller='searchResults')
+			div(class='column' ng-controller='searchResults')
 				h4
 					|{{meta}}
 				div(class='ui list')
@@ -23,6 +23,7 @@ block content
 								|{{result.title}}
 							div(class='description normalize')
 								p(ng-bind-html='result.excerpt | html' class='thaana')
+		div(class='columns')
 			div(class='one-third column' ng-controller='crawlerFeed')
 				h4
 					|Recently Indexed
