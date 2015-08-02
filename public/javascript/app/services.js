@@ -36,7 +36,6 @@ main.factory('Scopes', function ($rootScope) {
     };
 });
 
-
 main.directive('ngEnter', function() {
 	return function(scope, element, attrs) {
 		element.bind("keydown keypress", function(event) {
