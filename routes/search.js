@@ -42,14 +42,14 @@ router.get('/:query/:page', function(req, res, next) {
   },
   function (error, response) {
     if(error){
-    	res.setHeader('Content-Type', 'application/json');
+    	res.setHeader('Content-Type', 'application/json; charset=utf-8');
     	res.send(JSON.stringify({
     		code: 0,
     		response: 'Search Server Unavailable'
     	}));
     	return;
   	}
-  	res.setHeader('Content-Type', 'application/json');
+  	res.setHeader('Content-Type', 'application/json; charset=utf-8');
   	res.send(JSON.stringify({
   		code: 1,
   		response: response
