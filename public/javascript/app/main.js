@@ -6,7 +6,7 @@ main
 			success(function(data, status, headers, config){
 				data.response.forEach(function(record){
 					$scope.updates.push({
-						data: record.hash
+						data: record.hash,
 						time: record.timestamp
 					});
 				});
