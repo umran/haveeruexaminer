@@ -26,7 +26,7 @@ router.get('/', function(req, response, next) {
 		response.setHeader('Content-Type', 'application/json');
 		response.send(JSON.stringify({
 			code: 1,
-			response: res
+			response: pretty
 		}));
 	});
 });
