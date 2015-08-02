@@ -19,9 +19,8 @@ block content
 				div(class='ui list')
 					div(class='item' ng-repeat='result in results')
 						div(class='content')
-							h2
-								a(class='header')
-									|{{result.title}}
+							a(class='header')
+								|{{result.title}}
 							div(class='description')
 								p(ng-bind-html='result.excerpt | html')
 		div(class='columns')
