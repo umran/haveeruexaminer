@@ -24,7 +24,7 @@
 }
 
 .result-item {
-	padding-bottom: 30px; 
+	padding-bottom: 30px !important; 
 }
 
 .result-description {
