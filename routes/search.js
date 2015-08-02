@@ -52,8 +52,8 @@ router.get('/:query/:page', function(req, res, next) {
   	pretty.meta.hits = response.hits.total;
   	
   	pretty.items = [];
-  	var results = response.hits.hits
-  	results.forEarch(function(result){
+  	var results = response.hits.hits;
+  	results.forEach(function(result){
   		var item = {};
   		item.title = result._source.r_title;
   		
