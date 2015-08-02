@@ -17,11 +17,11 @@ block content
 				h4
 					|{{meta}}
 				div(class='ui list')
-					div(class='item separated' ng-repeat='result in results')
+					div(class='item result' ng-repeat='result in results')
 						div(class='content')
 							a(class='header')
 								|{{result.title}}
-							div(class='description')
+							div(class='description result')
 								p(ng-bind-html='result.excerpt | html')
 	div(class='container')
 		div(class='columns')

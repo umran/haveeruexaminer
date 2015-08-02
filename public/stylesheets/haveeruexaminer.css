@@ -23,10 +23,10 @@
 	text-overflow: ellipsis;
 }
 
-.ui.list>.item {
+.ui.list>.item .result {
 	padding-bottom: 30px; 
 }
 
-.ui.list>.item .description {
+.ui.list>.item .description .result{
 	padding-top: 5px;
 }
