@@ -20,7 +20,7 @@ block content
 							a(class='header')
 								|{{item.title}}
 							div(class='meta')
-								span()
+								span(class='override-thaana')
 									a
 										|{{item.url}}
 							div(class='description item-description')
@@ -28,7 +28,7 @@ block content
 									|{{item.intro}}
 								p(ng-bind-html='item.main | html')
 							div(class='extra')
-								span(class='state state-open normalize')
+								span(class='state state-open normalize override-thaana')
 									|{{item.hash}}
 			div(class='one-third column' id='crawlerFeed' ng-controller='crawlerFeed')
 				h4

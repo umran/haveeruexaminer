@@ -5,6 +5,10 @@
 	direction: rtl;
 }
 
+.override-thaana {
+	font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
 .latin {
 	direction: ltr;
 }
