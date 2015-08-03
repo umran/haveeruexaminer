@@ -17,7 +17,7 @@ block content
 				div(class='ui divided items')
 					div(class='item {{item.lang}}' ng-repeat='item in items')
 						div(class='content')
-							a(class='header')
+							a(class='header {{item.lang}}')
 								|{{item.title}}
 							div(class='meta')
 								span(class='override-thaana')
@@ -51,7 +51,7 @@ block content
 				div(class='ui list')
 					div(class='item result-item {{result.lang}}' ng-repeat='result in results')
 						div(class='content')
-							a(class='header')
+							a(class='header {{result.lang}}')
 								|{{result.title}}
 							div(class='description result-description')
 								p(ng-bind-html='result.excerpt | html')

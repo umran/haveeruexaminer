@@ -5,6 +5,16 @@
 	direction: rtl;
 }
 
+.ui.items>.item>.content>.thaana {
+	font-family: 'Noto Sans Thaana';
+	direction: rtl;
+}
+
+.ui.list>.item>.content>.thaana {
+	font-family: 'Noto Sans Thaana';
+	direction: rtl;
+}
+
 .override-thaana {
 	font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
