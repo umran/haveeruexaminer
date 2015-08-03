@@ -32,15 +32,15 @@ block content
 							a(class='header')
 								|{{item.title}}
 							div(class='meta')
-								span(class='url')
+								span(class='url normalize')
 									|{{item.url}}
 							div(class='description item-description')
 								p
 									|{{item.intro}}
 								p(ng-bind-html='item.main | html')
 							div(class='extra')
-								div(class='ui blue label')
-									|<i class="fa fa-history"></i>	{{item.hash}}
+								div(class='ui blue label normalize')
+									|{{item.hash}}
 			div(class='one-third column' ng-controller='crawlerFeed')
 				h4
 					i(class='fa fa-clock-o')
