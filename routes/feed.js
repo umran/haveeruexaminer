@@ -6,7 +6,7 @@ var utilities = new Utilities();
 
 router.get('/', function(req, response, next) {
 
-	Doc.find({}, {url:1, hash:1, r_title:1, r_intro:1, r_main:1, _id:1}).sort({$natural:-1}).limit(5).exec(function(err, res){
+	Doc.find({}, {url:1, hash:1, r_title:1, r_intro:1, r_main:1, _id:1}).sort({$natural:-1}).limit(10).exec(function(err, res){
 		if(err){
 			response.setHeader('Content-Type', 'application/json');
 			response.send(JSON.stringify({

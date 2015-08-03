@@ -34,6 +34,11 @@
 	padding-top: 5px;
 }
 
+#feed {
+	max-height: 330px;
+	overflow: scroll;
+}
+
 .ui.items>.item>.content>.item-description {
 	height: 50px; 
   overflow: hidden;

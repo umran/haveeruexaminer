@@ -2,7 +2,7 @@ extends layout
 
 block content
 	div(class='jumbotron')
-		div(class='container' ng-controller='search')
+		div(class='container' id='search' ng-controller='search')
 			div(class='columns')
 				div(class='one-half column centered')
 					input(class='input-block' type='text' ng-model='query' ng-enter='getResults()' autofocus)
@@ -11,21 +11,9 @@ block content
 						|search
 					button(class='btn next')
 						|advanced
-	div(class='container')
+	div(class='container' id='row1')
 		div(class='columns')
-			div(class='column' ng-controller='searchResults')
-				h4
-					|{{meta}}
-				div(class='ui list')
-					div(class='item result-item {{result.lang}}' ng-repeat='result in results')
-						div(class='content')
-							a(class='header')
-								|{{result.title}}
-							div(class='description result-description')
-								p(ng-bind-html='result.excerpt | html')
-	div(class='container')
-		div(class='columns')
-			div(class='two-thirds column' ng-controller='feed')
+			div(class='two-thirds column' id='feed' ng-controller='feed')
 				div(class='ui divided items')
 					div(class='item {{item.lang}}' ng-repeat='item in items')
 						div(class='content')
@@ -42,7 +30,7 @@ block content
 							div(class='extra')
 								span(class='state state-open normalize')
 									|{{item.hash}}
-			div(class='one-third column' ng-controller='crawlerFeed')
+			div(class='one-third column' id='crawlerFeed' ng-controller='crawlerFeed')
 				h4
 					i(class='fa fa-clock-o')
 					|	Recently Indexed
@@ -54,3 +42,15 @@ block content
 							div(class='description')
 								span(am-time-ago='item.time')
 								span(am-time-ago="message.time" am-preprocess="unix")
+	div(class='container' id='row2')
+		div(class='columns')
+			div(class='column' id='searchResults' ng-controller='searchResults')
+				h4
+					|{{meta}}
+				div(class='ui list')
+					div(class='item result-item {{result.lang}}' ng-repeat='result in results')
+						div(class='content')
+							a(class='header')
+								|{{result.title}}
+							div(class='description result-description')
+								p(ng-bind-html='result.excerpt | html')
