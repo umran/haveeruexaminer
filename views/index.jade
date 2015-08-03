@@ -14,19 +14,19 @@ block content
 	div(class='container')
 		div(class='columns')
 			div(class='two-thirds column' ng-controller='feed')
-				div(class='ui items')
-					div(class='item' ng-repeat='item in items')
+				div(class='ui items thaana')
+					div(class='item thaana' ng-repeat='item in items')
 						div(class='content')
 							a(class='header thaana')
 								|{{item.title}}
-							div(class='meta')
-								span(class='url')
+							div(class='meta thaana')
+								span(class='url thaana')
 									|{{item.url}}
 							div(class='description item-description thaana')
 								p
 									|{{item.intro}}
 								p(ng-bind-html='item.main | html')
-							div(class='extra')
+							div(class='extra thaana')
 								div(class='ui blue label')
 									|<i class="fa fa-history"></i>	{{item.hash}}
 			div(class='one-third column' ng-controller='crawlerFeed')
