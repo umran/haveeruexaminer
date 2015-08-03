@@ -16,7 +16,7 @@ block content
 			div(class='two-thirds column' ng-controller='feed')
 				div(class='ui items')
 					div(class='item' ng-repeat='item in items')
-						span(class={{item.lang}})
+						span(class='{{item.lang}}')
 							div(class='content')
 								a(class='header')
 									|{{item.title}}
@@ -50,7 +50,7 @@ block content
 					|{{meta}}
 				div(class='ui list')
 					div(class='item result-item' ng-repeat='result in results')
-						span(class={{result.lang}})
+						span(class='{{result.lang}}')
 							div(class='content')
 								a(class='header')
 									|{{result.title}}
