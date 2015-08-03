@@ -20,7 +20,7 @@
 	direction: rtl;
 }
 
-.ui.list>.item>.content>.thaana {
+.ui.list>.item>.content>.latin {
 	font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif, 'Noto Sans Thaana';
 	direction: ltr;
 }
