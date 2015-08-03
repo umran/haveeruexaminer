@@ -2,7 +2,7 @@ main
 	.controller('crawlerFeed', function($scope, $http, socket){
 		$scope.updates = [];
 		//populate crawlerFeed with 5 most recent db entries 
-		$http.get('/getrecent').
+		$http.get('/crawlerfeed').
 			success(function(data, status, headers, config){
 				data.response.forEach(function(record){
 					$scope.updates.push({

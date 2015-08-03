@@ -13,7 +13,8 @@ var passport = require('./dependencies/auth');
 var index = require('./routes/index');
 var search = require('./routes/search');
 var auth = require('./routes/auth');
-var getrecent = require('./routes/getrecent');
+var crawlerfeed = require('./routes/crawlerfeed');
+var feed = require('./routes/feed');
 
 var app = express();
 
@@ -61,7 +62,8 @@ app.use(passport.session());
 app.use('/', index);
 app.use('/search', search);
 app.use('/auth', auth);
-app.use('/getrecent', getrecent);
+app.use('/crawlerfeed', crawlerfeed);
+app.use('/feed', feed);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
