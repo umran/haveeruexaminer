@@ -13,8 +13,7 @@ main
 			});
 	})
 	.controller('crawlerFeed', function($scope, $http, socket){
-		$scope.updates = [];
-		//populate crawlerFeed with 5 most recent db entries 
+		$scope.updates = []; 
 		$http.get('/crawlerfeed').
 			success(function(data, status, headers, config){
 				data.response.forEach(function(record){
@@ -33,7 +32,7 @@ main
 				data:	data,
 				time: new Date() 
 			});
-			if($scope.updates.length > 5){
+			if($scope.updates.length > 10){
 				$scope.updates.splice(-1,1);
 			}
 		});
