@@ -35,7 +35,7 @@
 }
 
 #feed {
-	max-height: 350px;
+	max-height: 340px;
 	overflow: scroll;
 	padding-top:2px;
 }
