@@ -72,3 +72,7 @@
 	height: 50px; 
   overflow: hidden;
 }
+
+#searchResults{
+	padding-top:0px;
+}
