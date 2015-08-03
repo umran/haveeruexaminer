@@ -17,12 +17,12 @@ block content
 				div(class='ui divided items')
 					div(class='item' ng-repeat='item in items')
 						div(class='content')
-							a(class='header')
+							a(class='header thaana')
 								|{{item.title}}
 							div(class='meta')
 								span(class='url')
 									|{{item.url}}
-							div(class='description item-description')
+							div(class='description item-description thaana')
 								p
 									|{{item.intro}}
 								p(ng-bind-html='item.main | html')
@@ -41,6 +41,7 @@ block content
 							div(class='description')
 								span(am-time-ago='item.time')
 								span(am-time-ago="message.time" am-preprocess="unix")
+	div(class='ui clearing divider')
 	div(class='container')
 		div(class='columns')
 			div(class='column' ng-controller='searchResults')
