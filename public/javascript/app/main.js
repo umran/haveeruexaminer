@@ -1,4 +1,17 @@
 main
+	.controller('feed', function($scope, $http){
+		$scope.items = [];
+		//populate crawlerFeed with 5 most recent db entries 
+		$http.get('/feed').
+			success(function(data, status, headers, config){
+				data.response.forEach(function(record){
+					$scope.updates.push(record);
+				});
+			}).
+			error(function(data, status, headers, config){
+				return;
+			});
+	})
 	.controller('crawlerFeed', function($scope, $http, socket){
 		$scope.updates = [];
 		//populate crawlerFeed with 5 most recent db entries 
