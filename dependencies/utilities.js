@@ -1,5 +1,6 @@
 var Entities = require('html-entities').XmlEntities;
 entities = new Entities();
+var re = new RegExp("[\u0780-\u07BF]");
 
 module.exports = function(){
 	this.decode = function(input){
@@ -19,5 +20,11 @@ module.exports = function(){
 	}
 	this.cutTrailing = function(input){
 		return input.replace(/(<\/?br\s*\/?>){2,}/gi, '<br>');
+	}
+	this.getLang = function(input){
+		if(re.test(input) === true){
+			return 'thaana';
+		}
+		return 'latin';
 	}
 }

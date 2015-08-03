@@ -25,7 +25,13 @@ router.get('/', function(req, response, next) {
 			item.url = record.url;
 			item.title = record.r_title;
 			item.intro = record.r_intro;
-			item.main = utilities.cutTrailing(utilities.strip_tags(utilities.decode(record.r_main), '<br>'));
+			
+			//sanitize html entities
+			var sanitized = utilities.cutTrailing(utilities.strip_tags(utilities.decode(record.r_main), '<br>'));
+			item.main = sanitized;
+			//determine language
+			item.lang = utilities.getLang(sanitized);
+			
 			pretty.push(item);
 		});
 		
