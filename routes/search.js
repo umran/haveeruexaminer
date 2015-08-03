@@ -70,7 +70,7 @@ router.get('/:query/:page', function(req, res, next) {
   		item.excerpt = excerpt;
   		
   		//determine language
-			item.lang = utilities.getLang(excerpt);  		
+			item.lang = utilities.getLang(result._source.r_title);  		
   		
   		pretty.items.push(item);
   	});

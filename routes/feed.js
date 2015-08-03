@@ -27,10 +27,9 @@ router.get('/', function(req, response, next) {
 			item.intro = record.r_intro;
 			
 			//sanitize html entities
-			var sanitized = utilities.cutTrailing(utilities.strip_tags(utilities.decode(record.r_main), '<br>'));
-			item.main = sanitized;
+			item.main = utilities.cutTrailing(utilities.strip_tags(utilities.decode(record.r_main), '<br>'));
 			//determine language
-			item.lang = utilities.getLang(sanitized);
+			item.lang = utilities.getLang(record.r_title);
 			
 			pretty.push(item);
 		});
