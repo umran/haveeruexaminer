@@ -1,12 +1,27 @@
 @font-face {
   font-family: 'Noto Sans Thaana';
-  src: url('NotoSansThaana-Regular.ttf')format('truetype');
   font-weight: normal;
   font-style: normal;
+  src: url('NotoSansThaana-Regular.ttf')format('truetype');
 }
 @font-face {
   font-family: 'Noto Sans Thaana';
-  src: url('NotoSansThaana-Bold.ttf')format('truetype');
   font-weight: bold;
   font-style: normal;
+  src: url('NotoSansThaana-Bold.ttf')format('truetype');
+}
+
+@font-face {
+  font-family: 'Noto Sans Thaana';
+  font-weight: bold;
+  font-style: normal;
+  src: local('Lato Regular'), local('Lato-Regular');
+  unicode-range: U+0000-007F;
+}
+@font-face {
+  font-family: 'Noto Sans Thaana';
+  font-weight: normal;
+  font-style: normal;
+  src: local('Lato Regular'), local('Lato-Regular');
+  unicode-range: U+0000-007F;
 }
