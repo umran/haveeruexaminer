@@ -13,6 +13,18 @@ block content
 						|advanced
 	div(class='container')
 		div(class='columns')
+			div(class='column' ng-controller='searchResults')
+				h4
+					|{{meta}}
+				div(class='ui list')
+					div(class='item result-item {{result.lang}}' ng-repeat='result in results')
+						div(class='content')
+							a(class='header')
+								|{{result.title}}
+							div(class='description result-description')
+								p(ng-bind-html='result.excerpt | html')
+	div(class='container')
+		div(class='columns')
 			div(class='two-thirds column' ng-controller='feed')
 				div(class='ui items')
 					div(class='item {{item.lang}}' ng-repeat='item in items')
@@ -41,16 +53,3 @@ block content
 							div(class='description')
 								span(am-time-ago='item.time')
 								span(am-time-ago="message.time" am-preprocess="unix")
-	div(class='ui clearing divider')
-	div(class='container')
-		div(class='columns')
-			div(class='column' ng-controller='searchResults')
-				h4
-					|{{meta}}
-				div(class='ui list')
-					div(class='item result-item {{result.lang}}' ng-repeat='result in results')
-						div(class='content')
-							a(class='header')
-								|{{result.title}}
-							div(class='description result-description')
-								p(ng-bind-html='result.excerpt | html')
