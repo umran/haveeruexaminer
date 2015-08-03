@@ -1,4 +1,5 @@
 @import url(/stylesheets/primer-bootstrap.css);
+@import url(/fonts/thaana/thaana.css);
 
 .thaana {
 	font-family: 'Noto Sans Thaana';
