@@ -57,11 +57,15 @@ main
 				});
 		}
 	})
-	.controller('searchResults', function($scope, Scopes){
+	.controller('searchResults', function($scope, $location, $anchorScroll, Scopes){
 		$scope.$watch(function () { return Scopes.get('meta'); }, function (newValue, oldValue) {
       if (newValue !== oldValue) $scope.meta = 'fetched '+newValue.hits+' documents in '+(newValue.time/1000)+' seconds ';
     });
 		$scope.$watch(function () { return Scopes.get('results'); }, function (newValue, oldValue) {
       if (newValue !== oldValue) $scope.results = newValue;
     });
+    
+    $location.hash('searchResults');
+    $anchorScroll();
+    
 	});
