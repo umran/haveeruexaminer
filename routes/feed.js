@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Doc = require('../models/doc.js');
 var Utilities = require('../dependencies/utilities.js');
+var utilities = new Utilities();
 
 router.get('/', function(req, response, next) {
 
