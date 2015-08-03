@@ -3,6 +3,8 @@ var router = express.Router();
 var elastic = require('../dependencies/elastic.js');
 var client = elastic.client;
 var perPage = 15;
+var Utilities = require('../dependencies/utilities.js');
+var utilities = new Utilities;
 
 /* GET users listing. */
 router.get('/:query/:page', function(req, res, next) {
@@ -68,6 +70,10 @@ router.get('/:query/:page', function(req, res, next) {
   		}
   		
   		item.excerpt = excerpt;
+  		
+  		//determine language
+			item.lang = utilities.getLang(excerpt);  		
+  		
   		pretty.items.push(item);
   	});
   	
