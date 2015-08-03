@@ -20,7 +20,8 @@ router.get('/:query/:page', function(req, res, next) {
     	query: {
         match: {
           _all: userQuery
-        }
+        },
+        analyzer: 'english'
       },
       highlight: {
         order: 'score',
