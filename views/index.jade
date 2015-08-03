@@ -14,7 +14,7 @@ block content
 	div(class='container')
 		div(class='columns')
 			div(class='two-thirds column' ng-controller='feed')
-				div(class='ui divided items')
+				div(class='ui items')
 					div(class='item' ng-repeat='item in items')
 						div(class='content')
 							a(class='header thaana')
@@ -27,8 +27,8 @@ block content
 									|{{item.intro}}
 								p(ng-bind-html='item.main | html')
 							div(class='extra')
-								div(class='ui green label')
-									|<i class="fa fa-check-circle-o"></i>	{{item.hash}}
+								div(class='ui blue label')
+									|<i class="fa fa-history"></i>	{{item.hash}}
 			div(class='one-third column' ng-controller='crawlerFeed')
 				h4
 					i(class='fa fa-clock-o')
