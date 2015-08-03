@@ -35,8 +35,9 @@
 }
 
 #feed {
-	max-height: 330px;
+	max-height: 350px;
 	overflow: scroll;
+	padding-top:2px;
 }
 
 .ui.items>.item>.content>.item-description {
