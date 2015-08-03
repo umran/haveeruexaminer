@@ -10,16 +10,27 @@
 	direction: rtl;
 }
 
+.ui.items>.item>.content>.latin {
+	font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif, 'Noto Sans Thaana';
+	direction: ltr;
+}
+
 .ui.list>.item>.content>.thaana {
 	font-family: 'Noto Sans Thaana';
 	direction: rtl;
 }
 
+.ui.list>.item>.content>.thaana {
+	font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif, 'Noto Sans Thaana';
+	direction: ltr;
+}
+
 .override-thaana {
-	font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+	font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif, 'Noto Sans Thaana';
 }
 
 .latin {
+	font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif, 'Noto Sans Thaana';
 	direction: ltr;
 }
 
