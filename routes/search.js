@@ -19,8 +19,6 @@ router.get('/:query/:page', function(req, res, next) {
   	body: {
     	query: {
         match: {
-          // match the query against all of
-          // the fields in the docs index
           _all: userQuery
         }
       },
