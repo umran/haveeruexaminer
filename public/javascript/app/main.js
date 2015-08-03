@@ -69,6 +69,7 @@ main
       	
       	$location.hash('searchResults');
     		$anchorScroll();
+    		$location.hash('');
     	}
     });
     
