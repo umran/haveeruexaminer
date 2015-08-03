@@ -5,7 +5,7 @@ main
 		$http.get('/feed').
 			success(function(data, status, headers, config){
 				data.response.forEach(function(record){
-					$scope.updates.push(record);
+					$scope.items.push(record);
 				});
 			}).
 			error(function(data, status, headers, config){
