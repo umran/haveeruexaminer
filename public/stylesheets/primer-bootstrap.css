@@ -199,11 +199,11 @@ body{
 
 a{
 	color:#4078c0;
-	text-decoration:none
+	text-decoration:none;
 }
 
 a:hover,a:active{
-	text-decoration:underline
+	text-decoration:none;
 }
 
 hr,.rule{
