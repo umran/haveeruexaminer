@@ -29,7 +29,7 @@ block content
 								p(ng-bind-html='item.main | html')
 							div(class='extra')
 								span(class='state state-hash-open normalize hash override-thaana')
-									|{{item.hash}}
+									|<i class='fa fa-check-circle-o'></i>	{{item.hash}}
 			div(class='one-third column' id='crawlerFeed' ng-controller='crawlerFeed')
 				h4
 					i(class='fa fa-clock-o')
