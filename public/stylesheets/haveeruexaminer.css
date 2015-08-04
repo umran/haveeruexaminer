@@ -28,6 +28,7 @@
 
 .override-thaana {
 	font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif, 'Noto Sans Thaana';
+	direction: ltr;
 }
 
 .latin {
@@ -51,6 +52,11 @@
 	white-space: nowrap;
   overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.state-hash-open {
+	background-color: #6cc644;
+  max-width: 150px;
 }
 
 .ui.list>.result-item {
