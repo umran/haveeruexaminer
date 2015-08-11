@@ -59,13 +59,15 @@ router.get('/:query/:page', function(req, res, next) {
   		item.title = result._source.r_title;
   		
   		//prepare excerpt
-  		if(result.highlight.r_intro && result.highlight.fulltext){
+  		if(typeof result.highlight.r_intro !== 'undefined' && typeof result.highlight.fulltext !== 'undefined'){
   			var aggregate = result.highlight.r_intro.concat(result.highlight.fulltext);
   			var excerpt = aggregate.join('... ');
-  		} else if(result.highlight.r_intro){
+  		} else if(typeof result.highlight.r_intro !== 'undefined'){
   			var excerpt = result.highlight.r_intro.join('... ');
-  		} else{
+  		} else if(typeof result.highlight.fulltext !== 'undefined'){
   			var excerpt = result.highlight.fulltext.join('... ');
+  		} else{
+  			var excerpt = '[Excerpt Unavailable]';
   		}
   		
   		item.excerpt = excerpt;
