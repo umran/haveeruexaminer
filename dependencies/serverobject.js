@@ -9,7 +9,9 @@ app.set('port', port);
 
 // http and socket.io setup 
 var server = http.createServer(app);
-var io = require('socket.io')(server);
+var io = require('socket.io')(server, {
+  cookie: false
+});
 
 // start http and socket.io server
 server.listen(port, address);
