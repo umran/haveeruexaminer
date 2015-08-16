@@ -36,6 +36,10 @@ block content
 					|	Recently Indexed
 				div(class='ui celled padded table')
 					thead
+						tr
+							th
+							th
+							th
 					tbody
 						tr(ng-repeat='item in updates')
 							td
@@ -43,7 +47,7 @@ block content
 									|{{item.title}}
 							td
 								a(class='hash' href='{{item.url}}')
-									|{{item.url}}
+									|{{item.url}}<br>
 									span(am-time-ago='item.time')
 									span(am-time-ago="message.time" am-preprocess="unix")
 							td
