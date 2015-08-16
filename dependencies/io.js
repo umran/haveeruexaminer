@@ -7,7 +7,7 @@ module.exports = function(io){
 			//console.log(data);
 		});
 		socket.on('update', function(data){
-			Doc.find({hash: data}, {_id:1, url:1, r_title:1}).sort({$natural:-1}).limit(1).exec(function(err, res){
+			Doc.find({hash: "'"+data+"'"}, {_id:1, url:1, r_title:1}).sort({$natural:-1}).limit(1).exec(function(err, res){
 				if(err){
 					console.error(err);
 					return;
