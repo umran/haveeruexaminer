@@ -7,9 +7,13 @@ var Utilities = require('../dependencies/utilities.js');
 var utilities = new Utilities;
 
 /* GET users listing. */
-router.get('/:query/:page', function(req, res, next) {
+router.get('/:query/:page?', function(req, res, next) {
   var userQuery = req.params.query;
   var pageNum = req.params.page;
+  
+  if(!pageNum){
+  	pageNum = 1;
+  }
   
   //do search op
 	client.search({
