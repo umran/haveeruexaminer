@@ -13,14 +13,11 @@ main
 	});
 })
 .controller('crawlerFeed', function($scope, $http, socket){
-	$scope.updates = []; 
+	$scope.updates = [];
 	$http.get('/crawlerfeed')
 	.success(function(data, status, headers, config){
 		data.response.forEach(function(record){
-			$scope.updates.push({
-				data: record.hash,
-				time: record.timestamp
-			});
+			$scope.updates.push(record);
 		});
 	})
 	.error(function(data, status, headers, config){
@@ -28,10 +25,7 @@ main
 	});
 	
 	socket.on('update', function(data){
-		$scope.updates.unshift({
-			data:	data,
-			time: new Date() 
-		});
+		$scope.updates.unshift(data.response);
 		if($scope.updates.length > 10){
 			$scope.updates.splice(-1,1);
 		}

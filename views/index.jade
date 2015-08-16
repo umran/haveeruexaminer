@@ -13,7 +13,7 @@ block content
 						|advanced
 	div(class='container' id='row1')
 		div(class='columns')
-			div(class='four-fifths column' id='feed' ng-controller='feed')
+			div(class='two-thirds column' id='feed' ng-controller='feed')
 				div(class='ui divided items')
 					div(class='item {{item.lang}}' ng-repeat='item in items')
 						div(class='content')
@@ -30,18 +30,25 @@ block content
 							div(class='extra')
 								span(class='state state-hash-open normalize hash override-thaana')
 									|<i class='fa fa-check-circle-o'></i>	{{item.hash}}
-			div(class='one-fifth column' id='crawlerFeed' ng-controller='crawlerFeed')
+			div(class='one-third column' id='crawlerFeed' ng-controller='crawlerFeed')
 				h4
 					i(class='fa fa-clock-o')
 					|	Recently Indexed
-				div(class='ui list')
-					div(class='item normalize' ng-repeat='item in updates')
-						div(class='content')
-							a(class='header hash')
-								|{{item.data}}
-							div(class='description')
-								span(am-time-ago='item.time')
-								span(am-time-ago="message.time" am-preprocess="unix")
+				div(class='ui celled padded table')
+					thead
+					tbody
+						tr(ng-repeat='item in updates')
+							td
+								h2(class='ui header')
+									|{{item.title}}
+							td
+								a(class='hash' href='{{item.url}}')
+									|{{item.url}}
+									span(am-time-ago='item.time')
+									span(am-time-ago="message.time" am-preprocess="unix")
+							td
+								span(class='state state-hash-open normalize hash')
+									|<i class='fa fa-check-circle-o'></i>	{{item.hash}}
 	div(class='ui horizontal divider')
 	div(class='container' id='row2')
 		div(class='columns')

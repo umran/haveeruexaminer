@@ -4,7 +4,7 @@ var Doc = require('../models/doc.js');
 
 router.get('/', function(req, response, next) {
 
-	Doc.find({}, {hash:1, _id:1}).sort({$natural:-1}).limit(10).exec(function(err, res){
+	Doc.find({}, {_id:1, url:1, r_title:1, hash:1}).sort({$natural:-1}).limit(10).exec(function(err, res){
 		if(err){
 			response.setHeader('Content-Type', 'application/json');
 			response.send(JSON.stringify({
@@ -18,6 +18,8 @@ router.get('/', function(req, response, next) {
 		var pretty = [];
 		res.forEach(function(record){
 			var item = {};
+			item.title = record.r_title;
+			item.url = record.url;
 			item.hash = record.hash;
 			item.timestamp = Date.parse(record._id.getTimestamp());
 			pretty.push(item);
