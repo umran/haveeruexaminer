@@ -35,18 +35,18 @@ block content
 					i(class='fa fa-clock-o')
 					|	Recently Indexed
 				div(class='ui celled padded table')
-					thead.
-					tbody.
+					thead()
+					tbody()
 						tr(ng-repeat='item in updates')
-							td.
+							td()
 								h2(class='ui header')
 									|{{item.title}}
-							td.
+							td()
 								a(class='hash' href='{{item.url}}')
 									|{{item.url}}<br>
 									span(am-time-ago='item.time')
 									span(am-time-ago="message.time" am-preprocess="unix")
-							td.
+							td()
 								span(class='state state-hash-open normalize hash')
 									|<i class='fa fa-check-circle-o'></i>	{{item.hash}}
 	div(class='ui horizontal divider')
