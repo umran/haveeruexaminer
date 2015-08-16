@@ -87,7 +87,7 @@ router.get('/:query/:page?', function(req, res, next) {
   			//iterate through all highlight fields
   			for(var field in highlights){
 					if(highlights.hasOwnProperty(field)){
-						field.forEach(function(highlight){
+						highlights[field].forEach(function(highlight){
 							aggregate.push(highlight);
 						});
 					}
