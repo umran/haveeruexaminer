@@ -30,7 +30,12 @@ main
 	});
 	
 	socket.on('update', function(data){
-		$scope.updates.unshift(data.response);
+		$scope.updates.unshift({
+			title: data.response.title,
+			url: data.response.url,
+			time: data.response.timestamp,
+			hash: data.response.hash
+		});
 		if($scope.updates.length > 10){
 			$scope.updates.splice(-1,1);
 		}
