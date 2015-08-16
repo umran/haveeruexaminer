@@ -9,6 +9,10 @@ var utilities = new Utilities;
 /* GET users listing. */
 router.get('/:query/:page?', function(req, res, next) {
   var userQuery = req.params.query;
+  
+  //debugging
+  console.log(userQuery);
+  
   var pageNum = req.params.page;
   
   if(!pageNum){
@@ -44,16 +48,6 @@ router.get('/:query/:page?', function(req, res, next) {
     	res.send(JSON.stringify({
     		code: 0,
     		response: 'Search Server Unavailable'
-    	}));
-    	return;
-  	}
-  	
-  	//debugging
-  	if(!response){
-  		res.setHeader('Content-Type', 'application/json');
-    	res.send(JSON.stringify({
-    		code: 2,
-    		response: 'Something weird is going on'
     	}));
     	return;
   	}
