@@ -15,7 +15,7 @@ router.get('/:query/:page?', function(req, res, next) {
   	pageNum = 1;
   }
   
-  //do search op
+  //do search
 	client.search({
   	index: 'docs',
   	from: (pageNum - 1) * perPage,
@@ -44,6 +44,16 @@ router.get('/:query/:page?', function(req, res, next) {
     	res.send(JSON.stringify({
     		code: 0,
     		response: 'Search Server Unavailable'
+    	}));
+    	return;
+  	}
+  	
+  	//debugging
+  	if(!response){
+  		res.setHeader('Content-Type', 'application/json');
+    	res.send(JSON.stringify({
+    		code: 2,
+    		response: 'Something weird is going on'
     	}));
     	return;
   	}
