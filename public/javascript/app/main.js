@@ -17,7 +17,12 @@ main
 	$http.get('/crawlerfeed')
 	.success(function(data, status, headers, config){
 		data.response.forEach(function(record){
-			$scope.updates.push(record);
+			$scope.updates.push({
+				title: record.title,
+				url: record.url,
+				time: record.timestamp,
+				hash: record.hash
+			});
 		});
 	})
 	.error(function(data, status, headers, config){

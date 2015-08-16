@@ -14,7 +14,6 @@ module.exports = function(io){
 				}
 				
 				res.forEach(function(record){
-					
 					//parse results
 					var item = {};
 					item.title = record.r_title;
