@@ -30,22 +30,17 @@ block content
 								span(class='state state-hash-open normalize hash override-thaana')
 									|<i class='fa fa-check-circle-o'></i>	{{item.hash}}
 			div(class='one-half column' id='crawlerFeed' ng-controller='crawlerFeed')
-				h4
-					i(class='fa fa-clock-o')
-					|Recently Indexed
-				div(class='ui celled padded table')
-					thead
-					tbody
-						tr(ng-repeat='item in updates')
-							td
-								h2(class='ui header')
-									|{{item.title}}
-							td
-								a(class='hash' href='{{item.url}}')
-									|{{item.url}}<br>
-									span(am-time-ago='item.time')
-									span(am-time-ago="message.time" am-preprocess="unix")
-							td
+				div(class='ui divided items')
+					div(class='item' ng-repeat='item in updates')
+						div(class='content')
+							a(class='header')
+								|{{item.title}}
+							div(class='meta')
+								a
+									|{{item.url}}
+								span(am-time-ago='item.time')
+								span(am-time-ago="message.time" am-preprocess="unix")
+							div(class='extra')
 								span(class='state state-hash-open normalize hash')
 									|<i class='fa fa-check-circle-o'></i>	{{item.hash}}
 	div(class='ui horizontal divider')
