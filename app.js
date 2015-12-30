@@ -11,15 +11,17 @@ var MongoStore = require('connect-mongo')(session);
 var passport = require('./dependencies/auth');
 
 var index = require('./routes/index');
+var v2 = require('./routes/v2');
 var search = require('./routes/search');
 var auth = require('./routes/auth');
 var crawlerfeed = require('./routes/crawlerfeed');
 var feed = require('./routes/feed');
+var api = require('./routes/api');
 
 var app = express();
 
 // initialize mongo connection
-mongoose.connect('mongodb://10.129.254.29/haveeruexaminer');
+mongoose.connect('mongodb://localhost/haveeruexaminer');
 var conn = mongoose.connection;
 // export mongo connection object
 app.mongod = conn;
@@ -33,7 +35,7 @@ app.use(session({
   	resave: false,
   	saveUninitialized: false,
   	cookie: { secure: true },
-    store: new MongoStore({ 
+    	store: new MongoStore({ 
     	mongooseConnection: conn, 
     	ttl: 1 * 1 * 5 * 60 
     })
@@ -60,10 +62,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', index);
+app.use('/v2', v2);
 app.use('/search', search);
 app.use('/auth', auth);
 app.use('/crawlerfeed', crawlerfeed);
 app.use('/feed', feed);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

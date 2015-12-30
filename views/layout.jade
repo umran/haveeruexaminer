@@ -4,7 +4,7 @@ html
 		<meta charset="UTF-8">
 		title= title + ' · Haveeru Examiner'
 		link(rel='stylesheet', href='/fonts/font-awesome/css/font-awesome.min.css')
-		link(rel='stylesheet', href='/stylesheets/semantic/dist/semantic.min.css')
+		//link(rel='stylesheet', href='/stylesheets/semantic/dist/semantic.min.css')
 		link(rel='stylesheet', href='/stylesheets/haveeruexaminer.css')
 		script(type='text/javascript', src='/socket.io/socket.io.js')
 		script(type='text/javascript', src='/javascript/angular.min.js')
@@ -12,26 +12,27 @@ html
 		script(type='text/javascript', src='/javascript/app/bower_components/angular-moment/angular-moment.min.js')
 		script(type='text/javascript', src='/javascript/app/services.js')
 		script(type='text/javascript', src='/javascript/app/main.js')
-	body(ng-app='main')
+	body(class='bg-cover' ng-app='main' ng-class='bgCover')
 		header(class='masthead')
 			div(class='container')
 				a(class='masthead-logo')
-					img(class='logo-image' src='/graphics/logo/logo-alt24.svg')
+					img(class='logo-image' src='/graphics/logo/alt24.svg')
 				nav(class='masthead-nav')
 					a(href='#')
 						span(class='octicon octicon-pulse')
 						|	Analytics
-					a(href='#')
+					a(href='/api/docs')
 						span(class='octicon octicon-code')
 						|	API
 					a(href='https://github.com/umran/haveerucrawler')
 						span(class='octicon octicon-mark-github')
 						|	Github
+		
 		block content
 		footer(class='footer')
 			div(class='container')
 				div(class='columns')
 					div(class='four-fifths column')
-						|Developed and maintained by <a href='https://twitter.com/elemetrics01'>@elemetrics01</a><br>
+						|Developed by Rabaah and Umran<br>
 						|<strong>Currently v1.1.0</strong>
 					div(class='one-fifth column')

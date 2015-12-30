@@ -1,16 +1,42 @@
 extends layout
 block content
-	div(class='jumbotron')
-		div(class='container' id='search' ng-controller='search')
+	div(class='jumbotron ng-hide' ng-hide='hideSearch' ng-controller='search')
+		div(class='container' id='search')
 			div(class='columns')
 				div(class='one-half column centered')
 					input(class='input-block' type='text' ng-model='query' ng-enter='getResults()' autofocus)
 				div(class='one-half column centered group')
-					button(class='btn btn-primary' ng-click='getResults()')
-						|search
-					button(class='btn next')
-						|advanced
-	div(class='container' id='row1')
+					button(class='btn btn-custom' ng-click='getResults()')
+						|Search
+					button(class='btn btn-alt next')
+						|Advanced Search
+	div(class='container ng-show' ng-show='isStuff' id='row1' ng-controller='searchResults')
+		div(class='columns')
+			div(class='column')
+				div(class='flex-table')
+					div(class='flex-table-item flex-table-item-primary')
+						input(class='input-block' type='text' ng-model='query' ng-enter='getResults()')
+					div(class='flex-table-item')
+						button(class='btn btn-custom next' ng-click='getResults()')
+							|Search
+						button(class='btn btn-alt next')
+							|Advanced Search
+		div(class='columns')
+			div(class='column' id='searchResults')
+				h4(class='meta')
+					|{{meta}}
+				div(class='ui list')
+					div(class='item result-item {{result.lang}}' ng-repeat='result in results')
+						div(class='content')
+							a(class='header {{result.lang}}' href='{{result.url}}')
+								|{{result.title}}
+							br
+							small(class='text-open')
+								|{{result.url}}
+							div(class='description result-description')
+								small(ng-bind-html='result.excerpt | html')
+	//div(class='ui horizontal divider')
+	//div(class='container' id='row2')
 		div(class='columns')
 			div(class='one-half column' id='feed' ng-controller='feed')
 				div(class='ui divided items')
@@ -29,7 +55,7 @@ block content
 							div(class='extra')
 								span(class='state state-hash-open normalize hash override-thaana')
 									|<i class='fa fa-check-circle-o'></i>	{{item.hash}}
-			div(class='one-half column' id='crawlerFeed' ng-controller='crawlerFeed')
+			//div(class='one-half column' id='crawlerFeed' ng-controller='crawlerFeed')
 				div(class='ui divided items')
 					div(class='item' ng-repeat='item in updates')
 						div(class='content')
@@ -43,16 +69,3 @@ block content
 							div(class='extra')
 								span(class='state state-hash-open normalize hash')
 									|<i class='fa fa-check-circle-o'></i>	{{item.hash}}
-	div(class='ui horizontal divider')
-	div(class='container' id='row2')
-		div(class='columns')
-			div(class='column' id='searchResults' ng-controller='searchResults')
-				h4
-					|{{meta}}
-				div(class='ui list')
-					div(class='item result-item {{result.lang}}' ng-repeat='result in results')
-						div(class='content')
-							a(class='header {{result.lang}}')
-								|{{result.title}}
-							div(class='description result-description')
-								p(ng-bind-html='result.excerpt | html')

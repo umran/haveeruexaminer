@@ -1,0 +1,52 @@
+doctype html
+html
+	head
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		title= title + ' · Haveeru Examiner'
+		link(rel='stylesheet', href='/stylesheets/v2.css')
+		script(type='text/javascript', src='/javascript/jquery.min.js')
+		script(type='text/javascript', src='/custom_bs/js/bootstrap.min.js')
+		script(type='text/javascript', src='/socket.io/socket.io.js')
+		script(type='text/javascript', src='/javascript/angular.min.js')
+		script(type='text/javascript', src='/javascript/app/bower_components/moment/min/moment.min.js')
+		script(type='text/javascript', src='/javascript/app/bower_components/angular-moment/angular-moment.min.js')
+		script(type='text/javascript', src='/javascript/app/services.js')
+		script(type='text/javascript', src='/javascript/app/main.js')
+	
+	body(ng-app='main' ng-class='bgCover' ng-controller='primary')
+		block head
+			nav(class='navbar navbar-default')
+				div(class='container')
+					div(class='navbar-header')
+						button(type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#nav-collapse' aria-expanded='false')
+							span(class='sr-only')
+								|Expand Navigation Menu
+							span(class='icon-bar')
+							span(class='icon-bar')
+							span(class='icon-bar')
+						a(class='navbar-brand')
+							img(src='/graphics/logo/alt24.svg')
+					div(class='collapse navbar-collapse' id='nav-collapse')
+						ul(class='nav navbar-nav navbar-right')
+							li
+								a(href='#')
+									span(class='octicon octicon-pulse')
+									|	Analytics
+							li
+								a(href='/api/docs')
+									span(class='octicon octicon-code')
+									|	API
+							li
+								a(href='https://github.com/umran/haveerucrawler')
+									span(class='octicon octicon-mark-github')
+									|	Github
+		block content
+		block foot
+			footer(class='footer')
+				div(class='container')
+					div(class='row')
+						div(class='col-md-8')
+							|Developed by Rabaah and Umran<br>
+							|<strong>Currently v1.1.0</strong>
+						div(class='col-md-4')

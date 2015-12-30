@@ -27,14 +27,14 @@ router.get('/:query/:page?', function(req, res, next) {
   	body: {
     	query: {
         multi_match: {
-        	query: userQuery,
+          query: userQuery,
           fields: ["r_title", "r_intro", "fulltext"]
         }
       },
       highlight: {
         order: 'score',
-        pre_tags: ['<mark>'],
-        post_tags: ['</mark>'],
+        pre_tags: ['<strong>'],
+        post_tags: ['</strong>'],
         fields: {
           r_intro: {fragment_size: 150, number_of_fragments: 0},
           fulltext: {fragment_size: 150, number_of_fragments: 3}
@@ -65,6 +65,7 @@ router.get('/:query/:page?', function(req, res, next) {
   	results.forEach(function(result){
   		var item = {};
   		item.title = result._source.r_title;
+  		item.url = result._source.url;
   		
   		//prepare excerpt
   		if(typeof result.highlight !== 'undefined'){
@@ -90,7 +91,7 @@ router.get('/:query/:page?', function(req, res, next) {
   		item.excerpt = excerpt;
   		
   		//determine language
-			item.lang = utilities.getLang(result._source.r_title);  		
+		item.lang = utilities.getLang(result._source.r_title);  		
   		
   		pretty.items.push(item);
   	});

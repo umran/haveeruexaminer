@@ -1,0 +1,56 @@
+extends layoutv2
+block content
+	// this collapses upon submitting search or upon toggling advanced search or upon submitting advanced search
+	div(class='container' ng-hide='hideSearch')
+		div(class='jumbotron')
+			div(class='row')
+				div(class='col-md-6 col-xs-8 centered')
+					input(type='text' ng-class='inputClass' placeholder='' ng-model='query' ng-keypress='toThaana(event)' value='{{query}}' ng-enter='getResults()' autofocus)
+			div(class='row home-btn-group')
+				div(class='col-md-6 col-xs-8 centered')
+					div(class='btn-group' role='group')
+						button(type='button' class='btn btn-primary' ng-click='getResults()')
+							|<strong>Search</strong>
+						button(type='button' class='btn btn-primary')
+							span(class='glyphicon glyphicon-cog')
+					div(class='btn-group btn-is-next')
+						button(type='button' class='btn btn-link dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+								|Language: <strong>{{lang}}</strong>	
+								span(class='caret icon-is-next')
+						ul(class='dropdown-menu')
+							li
+								a(href='' ng-click='setLang(0)')
+									|English
+							li(class='thaana')
+								a(href='' ng-click='setLang(1)')
+									|ދިވެހި
+	
+	// this expands upon submitting search to reveal results
+	div(class='container' ng-show='showResults')
+		div(class='input-group')
+			input(type='text' ng-class='inputClass' placeholder='' ng-model='query' ng-keypress='toThaana(event)' value='{{query}}' ng-enter='getResults()' autofocus)
+			div(class='input-group-btn')
+				button(type='button' class='btn btn-primary' ng-click='getResults()')
+					|<strong>Search</strong>
+				button(type='button' class='btn btn-primary')
+					span(class='glyphicon glyphicon-cog')
+				button(type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+					|<strong>{{langSh}}</strong>	
+					span(class='caret')
+				ul(class='dropdown-menu')
+					li
+						a(href='' ng-click='setLang(0)')
+							|English
+					li(class='thaana')
+						a(href='' ng-click='setLang(1)')
+							|ދިވެހި
+		ul(class='media-list results')
+			li(class='media {{result.lang}}' ng-repeat='result in results')
+				div(class='media-body {{result.lang}}')
+					h4(class='media-heading {{result.lang}}')
+						a(class='{{result.lang}}' href='{{result.url}}')
+							|{{result.title}}
+					p(class='text-success')
+						|{{result.url}}
+					p(ng-bind-html='result.excerpt | html')
+	// this expands upon toggling advanced search to reveal search filters

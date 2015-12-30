@@ -1,0 +1,82 @@
+@import url(/fonts/octicons/octicons.css);
+@import url(/fonts/thaana/thaana.css);
+@import url(/custom_bs/css/bootstrap.css);
+@import url(/stylesheets/markdown.css);
+
+/* Layout Classes */
+
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Noto Sans Thaana';
+	margin-bottom: 9rem;
+}
+
+.bg-cover {
+	background: url('/graphics/ot.jpg') no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.no-bg-cover {
+	background-image: none;
+}
+
+.footer {
+	position: absolute;
+  	bottom: 0;
+  	width: 100%;
+  	height: 9rem;
+	padding-top:2rem;
+	padding-bottom:2rem;
+	line-height:1.75;
+	color:#333;
+}
+
+/* Bootstrap Overrides */
+
+.navbar-default {
+	font-size: 1.25rem;
+}
+
+@media (min-width: 768px) {
+	.navbar-collapse{
+		padding-right: 0;
+		padding-left: 0;
+	}
+}
+
+/* Helper Classes */
+
+.home-btn-group {
+	padding-top: 10px;
+}
+
+.btn-is-next {
+	margin-left: 10px;
+}
+
+.centered {
+    display: block;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-success{
+	color: #00591E;
+}
+
+.thaana {
+	font-family: 'Noto Sans Thaana';
+	direction: rtl;
+}
+
+.results {
+	margin-top: 35px;
+}

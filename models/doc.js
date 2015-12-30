@@ -1,10 +1,12 @@
 var mongoose = require('mongoose');
 
 var docSchema = new mongoose.Schema({
-	url: {type: String, unique: true, required: true},
+  url: {type: String, unique: true, required: true},
   r_title: {type: String, required: false},
   r_byline: {type: String, required: false},
   r_date: {type: String, required: false},
+  date: {type:Date, required: false},
+  indexed_date: {type:Date, required: false},
   r_intro: {type: String, required: false},
   r_main: {type: String, required: false},
   fulltext: {type: String, required: false},

@@ -7,7 +7,11 @@ module.exports = function(io){
 			//console.log(data);
 		});
 		socket.on('update', function(data){
-			Doc.find({hash: "'"+data+"'"}, {_id:1, url:1, r_title:1}).sort({$natural:-1}).limit(1).exec(function(err, res){
+			
+			//debugging block
+			console.log(data);
+			
+			Doc.find({hash: "'"+data+"'"}, {_id:1, url:1, r_title:1, indexed_date:1}).sort({$natural:-1}).limit(1).exec(function(err, res){
 				if(err){
 					console.error(err);
 					return;
@@ -19,7 +23,7 @@ module.exports = function(io){
 					item.title = record.r_title;
 					item.url = record.url;
 					item.hash = record.hash;
-					item.timestamp = Date.parse(record._id.getTimestamp());
+					item.timestamp = Date.parse(record.indexed_date);
 					
 					socket.broadcast.emit('update', JSON.stringify({
 						code: 1,

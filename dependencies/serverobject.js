@@ -3,7 +3,7 @@ var app = require('../app');
 var http = require('http');
 
 // define http and socket.io port
-var address = '10.129.253.151';
+var address = 'localhost';
 var port = '3080';
 app.set('port', port);
 

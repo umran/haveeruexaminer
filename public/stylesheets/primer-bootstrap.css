@@ -420,8 +420,8 @@ label{
 }
 
 .form-control.focus,.form-control:focus,input[type="text"].focus,input[type="text"]:focus,input[type="password"].focus,input[type="password"]:focus,input[type="email"].focus,input[type="email"]:focus,input[type="number"].focus,input[type="number"]:focus,input[type="tel"].focus,input[type="tel"]:focus,input[type="url"].focus,input[type="url"]:focus,select.focus,select:focus,textarea.focus,textarea:focus{
-	border-color:#51a7e8;
-	box-shadow:inset 0 1px 2px rgba(0,0,0,0.075),0 0 5px rgba(81,167,232,0.5)
+	border-color:#ccc;
+	box-shadow:inset 0 1px 2px rgba(0,0,0,0.075)
 }
 
 select:not([multiple]){
@@ -854,7 +854,7 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
 
 .select:focus{
 	outline:none;
-	border-color:#51a7e8;
+	border-color:#51A7E8;
 	box-shadow:inset 0 1px 2px rgba(0,0,0,0.075),0 0 5px rgba(81,167,232,0.5)
 }
 
@@ -1347,6 +1347,31 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
 .btn-danger:hover .counter,.btn-danger:active .counter,.btn-danger.selected .counter{
 	color:#b33630;
 	background-color:#fff
+}
+
+.btn-alt{
+	color:#66757F
+}
+
+.btn-alt:hover{
+	color:#fff;
+	background-color:#66757F;
+	background-image:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.05));
+	border-color:#66757F
+}
+
+.btn-custom{
+	color:#fff;
+	background-color:#55ACEE;
+	background-image:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.05));
+	border-color:#55ACEE
+}
+
+.btn-custom:hover{
+	color: #fff;
+	background-color:#3b88c3;
+	background-image:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.05));
+	border-color: #3b88c3
 }
 
 .btn-outline{
@@ -2038,7 +2063,7 @@ a.tabnav-extra:hover{
 	max-width:10000px !important
 }
 
-.markdown-body{
+/*.markdown-body{
 	overflow:hidden;
 	font-family:"Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
 	font-size:16px;
@@ -2429,7 +2454,7 @@ a.tabnav-extra:hover{
 	border-bottom-color:#bbb;
 	border-radius:3px;
 	box-shadow:inset 0 -1px 0 #bbb
-}
+}*/
 
 @font-face{
 	font-family:'anchorjs-link';
@@ -2762,24 +2787,24 @@ body{
 .masthead{
 	padding-top:1rem;
 	padding-bottom:1rem;
-	margin-bottom:1.5rem;
+	margin-bottom:2rem;
 	text-align:center;
-	background-color:#4078C0
+	background-color:transparent;
 }
 
 .masthead a{
-	color:rgba(255,255,255,0.5)
+	color:#66757F
 }
 
 .masthead a:hover{
-	color:#fff;
+	color:#55ACEE;
 	text-decoration:none
 }
 
 .masthead .masthead-logo{
 	display:inline-block;
 	/*font-size:1.5rem;*/
-	color:rgba(255,255,255,0.5)
+	color:#66757F
 }
 
 .masthead .masthead-logo .mega-octicon{
@@ -2812,7 +2837,7 @@ body{
 }
 
 .masthead-nav .active{
-	color:#fff;
+	color:#55ACEE;
 	font-weight:500
 }
 
@@ -2827,17 +2852,17 @@ body{
 @media (min-width: 34em){
 	.masthead-nav{
 		float:right;
-		margin-top:.35rem
+		margin-top:.25rem
 	}
 
 }
 
 .jumbotron{
-	margin-top:-2rem;
-	margin-bottom:2rem;
+	/*margin-top:-2rem;
+	margin-bottom:2rem;*/
 	padding-top:2rem;
-	padding-bottom:4rem;
-	background-color:#4078C0;
+	padding-bottom:2rem;
+	background-color:transparent;
 	font-size:1.25rem;
 	color:rgba(255,255,255,0.5);
 	text-align:center
@@ -2850,8 +2875,7 @@ body{
 
 @media (min-width: 34em){
 	.jumbotron{
-		padding-top:6rem;
-		padding-bottom:8rem;
+		margin-top:10rem;
 		font-size:1.25rem;
 		/*text-align:left*/
 	}
@@ -2886,12 +2910,12 @@ body{
 }
 
 .footer{
-	padding-top:3rem;
-	padding-bottom:3rem;
-	margin-top:3rem;
+	padding-top:2rem;
+	padding-bottom:2rem;
+	/*margin-top:3rem;*/
 	line-height:1.75;
-	color:#7a7a7a;
-	border-top:1px solid #eee
+	color:#333;
+	/*border-top:1px solid #eee*/
 }
 
 .footer strong{
