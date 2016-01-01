@@ -46,9 +46,9 @@ block content
 							|ދިވެހި
 		ul(class='media-list results')
 			li(class='media {{result.lang}}' ng-repeat='result in results')
-				div(class='media-body {{result.lang}}')
-					h4(class='media-heading {{result.lang}}')
-						a(class='{{result.lang}}' href='{{result.url}}')
+				div(class='media-body')
+					h4(class='media-heading')
+						a(href='{{result.url}}')
 							|{{result.title}}
 					p(class='text-success')
 						|{{result.url}}

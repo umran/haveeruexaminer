@@ -77,6 +77,11 @@ body {
 	direction: rtl;
 }
 
+.thaana-text {
+	font-family: 'Noto Sans Thaana';
+	text-align: right;
+}
+
 .results {
 	margin-top: 35px;
 }

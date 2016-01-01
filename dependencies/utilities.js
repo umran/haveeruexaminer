@@ -23,8 +23,8 @@ module.exports = function(){
 	}
 	this.getLang = function(input){
 		if(re.test(input) === true){
-			return 'thaana';
+			return 'thaana-text';
 		}
-		return 'latin';
+		return 'latin-text';
 	}
 }
