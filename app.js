@@ -27,15 +27,15 @@ var conn = mongoose.connection;
 app.mongod = conn;
 
 // configure express to trust nginx headers
-app.enable('trust proxy');
+app.enable('trust proxy', 1);
 
 // setup secure sessions
 app.use(session({
     secret: 'some secret',
-  	resave: false,
-  	saveUninitialized: false,
-  	cookie: { secure: true },
-    	store: new MongoStore({ 
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: true },
+    store: new MongoStore({ 
     	mongooseConnection: conn, 
     	ttl: 1 * 1 * 5 * 60 
     })
