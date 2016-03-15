@@ -1,6 +1,9 @@
 var elasticsearch = require('elasticsearch');
 var client = new elasticsearch.Client({
-  host: 'localhost:9200'
+	hosts: ['https://haveeruexaminer:0998a3407@search.haveeruexaminer.com'],
+	ssl: {
+		rejectUnauthorized: true
+	}
 });
 
 module.exports.client = client;
