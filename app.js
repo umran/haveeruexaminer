@@ -10,12 +10,12 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var passport = require('./dependencies/auth');
 
-var index = require('./routes/index');
 var v2 = require('./routes/v2');
 var search = require('./routes/search');
 var auth = require('./routes/auth');
 var crawlerfeed = require('./routes/crawlerfeed');
 var feed = require('./routes/feed');
+var fetch = require('./routes/fetch');
 var api = require('./routes/api');
 
 var app = express();
@@ -61,12 +61,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', index);
-app.use('/v2', v2);
+app.use('/', v2);
 app.use('/search', search);
 app.use('/auth', auth);
 app.use('/crawlerfeed', crawlerfeed);
 app.use('/feed', feed);
+app.use('/fetch', fetch);
 app.use('/api', api);
 
 // catch 404 and forward to error handler

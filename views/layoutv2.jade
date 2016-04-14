@@ -14,7 +14,7 @@ html
 		script(type='text/javascript', src='/javascript/app/services.js')
 		script(type='text/javascript', src='/javascript/app/main.js')
 	
-	body(ng-app='main' ng-class='bgCover' ng-controller='primary')
+	body(ng-app='main' ng-controller='primary' ng-class='bgCover')
 		block head
 			nav(class='navbar navbar-default')
 				div(class='container')
@@ -27,7 +27,24 @@ html
 							span(class='icon-bar')
 						a(class='navbar-brand')
 							img(src='/graphics/logo/alt24.svg')
-					div(class='collapse navbar-collapse' id='nav-collapse')
+					div(class='input-group searchBar')
+						input(type='text' ng-class='inputClass' placeholder='' ng-model='query' ng-keypress='toThaana(event)' value='{{query}}' ng-enter='getResults()' autofocus)
+						div(class='input-group-btn')
+							button(type='button' class='btn btn-primary' ng-click='getResults()')
+								|<strong>Search</strong>
+							button(type='button' class='btn btn-primary')
+								span(class='glyphicon glyphicon-cog')
+							button(type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+								|<strong>{{langSh}}</strong>	
+								span(class='caret')
+							ul(class='dropdown-menu')
+								li
+									a(href='' ng-click='setLang(0)')
+										|English
+								li(class='thaana')
+									a(href='' ng-click='setLang(1)')
+										|ދިވެހި
+					//div(class='collapse navbar-collapse' id='nav-collapse')
 						ul(class='nav navbar-nav navbar-right')
 							li
 								a(href='#')

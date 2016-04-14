@@ -1,56 +1,81 @@
 extends layoutv2
 block content
-	// this collapses upon submitting search or upon toggling advanced search or upon submitting advanced search
-	div(class='container' ng-hide='hideSearch')
-		div(class='jumbotron')
-			div(class='row')
-				div(class='col-md-6 col-xs-8 centered')
-					input(type='text' ng-class='inputClass' placeholder='' ng-model='query' ng-keypress='toThaana(event)' value='{{query}}' ng-enter='getResults()' autofocus)
-			div(class='row home-btn-group')
-				div(class='col-md-6 col-xs-8 centered')
-					div(class='btn-group' role='group')
-						button(type='button' class='btn btn-primary' ng-click='getResults()')
-							|<strong>Search</strong>
-						button(type='button' class='btn btn-primary')
-							span(class='glyphicon glyphicon-cog')
-					div(class='btn-group btn-is-next')
-						button(type='button' class='btn btn-link dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-								|Language: <strong>{{lang}}</strong>	
-								span(class='caret icon-is-next')
-						ul(class='dropdown-menu')
-							li
-								a(href='' ng-click='setLang(0)')
-									|English
-							li(class='thaana')
-								a(href='' ng-click='setLang(1)')
-									|ދިވެހި
+	//div(class='jumbotron')
+		div(class='row')
+			div(class='col-md-6 col-xs-12 centered')
+				input(type='text' ng-class='inputClass' placeholder='' ng-model='query' ng-keypress='toThaana(event)' value='{{query}}' ng-enter='getResults()' autofocus)
+		div(class='row home-btn-group')
+			div(class='col-md-6 col-xs-8 centered')
+				div(class='btn-group' role='group')
+					button(type='button' class='btn btn-primary' ng-click='getResults()')
+						|<strong>Search</strong>
+					button(type='button' class='btn btn-primary')
+						span(class='glyphicon glyphicon-cog')
+				div(class='btn-group btn-is-next')
+					button(type='button' class='btn btn-link dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+							|Language: <strong>{{lang}}</strong>	
+							span(class='caret icon-is-next')
+					ul(class='dropdown-menu')
+						li
+							a(href='' ng-click='setLang(0)')
+								|English
+						li(class='thaana')
+							a(href='' ng-click='setLang(1)')
+								|ދިވެހި
 	
 	// this expands upon submitting search to reveal results
 	div(class='container' ng-show='showResults')
-		div(class='input-group')
-			input(type='text' ng-class='inputClass' placeholder='' ng-model='query' ng-keypress='toThaana(event)' value='{{query}}' ng-enter='getResults()' autofocus)
-			div(class='input-group-btn')
-				button(type='button' class='btn btn-primary' ng-click='getResults()')
-					|<strong>Search</strong>
-				button(type='button' class='btn btn-primary')
-					span(class='glyphicon glyphicon-cog')
-				button(type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-					|<strong>{{langSh}}</strong>	
-					span(class='caret')
-				ul(class='dropdown-menu')
-					li
-						a(href='' ng-click='setLang(0)')
-							|English
-					li(class='thaana')
-						a(href='' ng-click='setLang(1)')
-							|ދިވެހި
-		ul(class='media-list results')
-			li(class='media {{result.lang}}' ng-repeat='result in results')
-				div(class='media-body')
-					h4(class='media-heading')
-						a(href='{{result.url}}')
-							|{{result.title}}
-					p(class='text-success')
-						|{{result.url}}
-					p(ng-bind-html='result.excerpt | html')
-	// this expands upon toggling advanced search to reveal search filters
+		div(class='row')
+			div(class='col-xs-12 col-md-12')
+				ul(class='media-list results')
+					h4(class='header')
+						|{{meta}}
+					li(class='media {{result.lang}}' ng-repeat='result in results')
+						div(class='media-body')
+							h4(class='media-heading')
+								a(href='' ng-click='fetchDoc(result.hash)')
+									|{{result.title}}
+							.post-meta-summary
+								a(class='post-meta-link-author' href='#')
+									|{{result.url}}
+								span(class='post-meta-supplemental')
+									span(am-time-ago='result.date')
+							p(class='result-body' ng-bind-html='result.excerpt | html')
+				ul(class='pagination pagination-sm')
+					li(ng-repeat='page in pages')
+						a(href='' ng-click='getResults(page)')
+							|{{page}}
+	div(class='container' ng-show='showDoc')
+		div(class='row')
+			div(class='col-xs-12 col-md-12')
+				div(class='{{document.lang}}')				
+					h2()
+						|{{document.title}}
+					.post-meta-summary
+						a(class='post-meta-link-author' href='#')
+							|{{document.url}}
+						span(class='post-meta-supplemental')
+							span(am-time-ago='document.date')
+					p(class='result-body' ng-bind-html='document.main | html')
+			// display feed
+			//div(class='col-xs-12 col-md-6' id='row2')
+				div(class='feed pull-right' id='feed' ng-controller='feed')
+					div(class='item {{item.lang}}' ng-repeat='item in items')
+						div(class='post')
+							div(class='panel panel-default')
+								div(class='panel-body')
+									h3(class='post-title {{item.lang}}')
+										a(href='' ng-click='fetchDoc(item.hash)')
+											|{{item.title}}
+									p(class='post-body')
+										|{{item.intro}}
+									p(class='post-body' ng-bind-html='item.main | html')
+								div(class='panel-heading')
+									//.post-meta-avatar
+										img(src='https://cdn-images-1.medium.com/fit/c/72/72/1*UZtp1fi_asudK3AaEwuniw.jpeg' class='profile-image avatar')
+									.post-meta-summary
+										a(class='post-meta-link-author' href='#')
+											|{{item.url}}
+										span(class='post-meta-supplemental')
+											span(am-time-ago='item.date')
+	

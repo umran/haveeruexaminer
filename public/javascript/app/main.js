@@ -11,11 +11,11 @@ main
 	thaanaKeyboard._transTo = {'phonetic': 'ްއެރތޔުިޮޕ][\\ަސދފގހޖކލ؛\'ޒ×ޗވބނމ،./ޤޢޭޜޓޠޫީޯ÷}{|ާށޑﷲޣޙޛޚޅ:\"ޡޘޝޥޞޏޟ><؟)( ','phonetic-hh': 'ޤަެރތޔުިޮޕ][\\އސދފގހޖކލ؛\'ޒޝްވބނމ،./ﷲާޭޜޓޠޫީޯޕ}{|ޢށޑޟޣޙޛޚޅ:\"ޡޘޗޥޞޏމ><؟)( ','typewriter': 'ޫޮާީޭގރމތހލ[]ިުްަެވއނކފﷲޒޑސޔޅދބށޓޯ×’“/:ޤޜޣޠޙ÷{}<>.،\"ޥޢޘޚޡ؛ޖޕޏޗޟޛޝ\\ޞ؟)( '}
 
 	//set background class
-	$scope.bgCover = 'bg-cover';
+	$scope.bgCover = 'no-bg-cover';
 	
 	//initially show primary search and hide results
-	$scope.hideSearch = false;
-	$scope.showResults = false;
+	$scope.showResults = true;
+	$scope.showDoc = false;
 	
 	//set default language and input type to English
 	$scope.lang = 'English';
@@ -81,39 +81,56 @@ main
 	}
 
 	//do elasticsearch query
-	$scope.getResults = function(){
-	
-		if($scope.hideSearch === false){
-			$scope.hideSearch = true;
-		}
+	$scope.getResults = function(page){
+		$scope.showResults = true;
+		$scope.showDoc = false;
 		
-		if($scope.showResults === false){
-			$scope.showResults = true;
-		}	
-		
-		if($scope.bgCover === 'bg-cover'){
-			$scope.bgCover = 'no-bg-cover';
+		if(!page) {
+			page = 1;
 		}
-	
 		var query = $scope.query;
 		
-		$http.get('/search/'+query+'/1')
+		$http.get('/search/'+query+'/'+page)
 		.success(function(data, status, headers, config){
 			if(data.code === 0){
 				return;
 			}
 
-			$scope.meta = 'a total of '+data.response.meta.hits+' hits in '+(data.response.meta.time/1000)+' seconds';
+			$scope.meta = +data.response.meta.hits+' hits in '+(data.response.meta.time/1000)+' seconds';
 			$scope.results = data.response.items;
+			
+			$scope.pages = [];
+				
+			for(i=1; i <= Math.ceil(data.response.meta.hits/15); i++){
+				var s = i;
+				if(s < 10){
+					s = '0'+s;
+				}
+				$scope.pages.push(s);
+			}
 		})
 		.error(function(data, status, headers, config){
 			return;
 		});
 	}
+	
+	//fetch document
+	$scope.fetchDoc = function(hash){
+		$http.get('/fetch/'+hash)
+		.success(function(data, status, headers, config){
+			$scope.document = data.response;
+		})
+		.error(function(data, status, headers, config){
+			return;
+		});
+		
+		$scope.showResults = false;
+		$scope.showDoc = true;
+	}
 })
 .controller('feed', function($scope, $http){
 	$scope.items = [];
-	//populate crawlerFeed with 5 most recent db entries 
+	//populate crawlerFeed with most recent db entries 
 	$http.get('/feed')
 	.success(function(data, status, headers, config){
 		data.response.forEach(function(record){
