@@ -119,13 +119,12 @@ main
 		$http.get('/fetch/'+hash)
 		.success(function(data, status, headers, config){
 			$scope.document = data.response;
+			$scope.showResults = false;
+			$scope.showDoc = true;
 		})
 		.error(function(data, status, headers, config){
 			return;
 		});
-		
-		$scope.showResults = false;
-		$scope.showDoc = true;
 	}
 })
 .controller('feed', function($scope, $http){
