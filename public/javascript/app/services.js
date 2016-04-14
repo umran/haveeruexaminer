@@ -1,4 +1,4 @@
-var main = angular.module('main', ['angularMoment']);
+var main = angular.module('main', ['angularMoment', 'ngProgress']);
 main.factory('socket', function ($rootScope) {
   var socket = io.connect();
   return {

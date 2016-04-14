@@ -1,5 +1,5 @@
 main
-.controller('primary', function($scope, $http, Scopes){
+.controller('primary', function($scope, $http, Scopes, ngProgressFactory){
 
 	//initialize model variables
 	$scope.query ='';
@@ -13,6 +13,9 @@ main
 	//set background class
 	$scope.bgCover = 'no-bg-cover';
 	
+	//create progress bar
+	$scope.progressbar = ngProgressFactory.createInstance();
+	$scope.progressbar.setColor('#093F84');
 	//initially show primary search and hide results
 	$scope.showResults = true;
 	$scope.showDoc = false;
@@ -82,6 +85,9 @@ main
 
 	//do elasticsearch query
 	$scope.getResults = function(page){
+		//start progress bar on click
+		$scope.progressbar.start();
+	
 		$scope.showResults = true;
 		$scope.showDoc = false;
 		
@@ -108,21 +114,34 @@ main
 				}
 				$scope.pages.push(s);
 			}
+			
+			//complete progress bar on load
+			$scope.progressbar.complete();
 		})
 		.error(function(data, status, headers, config){
+			//complete progress bar on error too
+			$scope.progressbar.complete();
 			return;
 		});
 	}
 	
 	//fetch document
 	$scope.fetchDoc = function(hash){
+		//start progress bar on click
+		$scope.progressbar.start();
+		
 		$http.get('/fetch/'+hash)
 		.success(function(data, status, headers, config){
 			$scope.document = data.response;
 			$scope.showResults = false;
 			$scope.showDoc = true;
+			
+			//complete progress bar on load
+			$scope.progressbar.complete();
 		})
 		.error(function(data, status, headers, config){
+			//complete progress bar on error too
+			$scope.progressbar.complete();
 			return;
 		});
 	}
