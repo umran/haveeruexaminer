@@ -35,38 +35,38 @@ block content
 		div(class='container')
 			div(class='row')
 				div(class='col-xs-12 col-md-12')
-					div(class='alert alert-warning alert-dismissible' role='alert')
+					div(class='alert alert-info alert-dismissible' role='alert')
 						|<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 						p
 							|<strong>Query String Syntax</strong>
 						p
 							|The query string is parsed into a series of terms and operators. A term can be a single word — quick or brown — or a phrase, surrounded by double quotes — "quick brown" — which searches for all the words in the phrase, in the same order.
 						p
-							|You may fine-tune your search by narrowing it down to specific fields. The use of operators such as AND and OR allow you to build more specific queries — all available fields and some operators are explained below.
+							|You may fine-tune your search by performing subqueries on specific fields. For example you might want to search for all articles containing the term 'protest' that was published in the year 2012. All available fields and some operators are explained below. The full syntax reference is available <a href='https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax'>here</a>
 						p
 							|<strong>r_title</strong>
 							br
-							|Matches queries on article titles. For example <strong>r_title:(Nasheed OR Maumoon)</strong> matches documents whose tile contains either 'Nasheed' or 'Maumoon'.
+							|Matches queries on article titles. For example the expression <strong>r_title:(Nasheed OR Maumoon)</strong> matches documents whose tile contains either 'Nasheed' or 'Maumoon'.
 						p
 							|<strong>r_intro</strong>
 							br
-							|Matches queries on article subheadings. For example <strong>r_intro:('Nasheed resigns')</strong> matches documents whose subheading contains the phrase 'Nasheed resigns'.
+							|Matches queries on article subheadings. For example the expression <strong>r_intro:("Nasheed resigns")</strong> matches documents whose subheading contains the phrase 'Nasheed resigns'. Please note that phrase matching only works when the phrase is wrapped around double quotes (" ").
 						p
 							|<strong>r_fulltext</strong>
 							br
-							|Matches queries on the fulltext of articles. For example <strong>r_fulltext:(Yam*n)</strong> matches documents whose fulltext contains any term beginning with 'Yam' and ending with 'n' (as denoted by the wildcard character * in between). Please not that the fulltext field does not contain values from the r_byline, date and indexed_date fields.
+							|Matches queries on the fulltext of articles. For example the expression <strong>r_fulltext:(Yam*n)</strong> matches documents whose fulltext contains any term beginning with 'Yam' and ending with 'n' (as denoted by the wildcard character * in between). Please note that the fulltext field does not contain values from the r_byline, date and indexed_date fields.
 						p
 							|<strong>r_byline</strong>
 							br
-							|Matches queries on article authors. For example <strong>r_byline:(+Ahmed -Mohamed)</strong> matches documents whose byline includes the term 'Ahmed' (as specified by the + symbol), but does not include the term 'Mohamed' (as denoted by the - symbol).
+							|Matches queries on article authors. For example the expression <strong>r_byline:(+Ahmed -Mohamed)</strong> matches documents whose byline includes the term 'Ahmed' (as specified by the + symbol), but does not include the term 'Mohamed' (as denoted by the - symbol).
 						p
 							|<strong>date</strong>
 							br
-							|Matches articles published within a specific date range. For example <strong>date:[2012-01-01 TO 2012-12-31]</strong> matches articles published between the inclusive range 2012-01-01 - 2012-12-31 (as specified by the use of square brackets [ and ]).
+							|Matches articles published within a specific date range. For example the expression <strong>date:[2012-01-01 TO 2012-12-31]</strong> matches articles published between the inclusive range 2012-01-01 - 2012-12-31 (as specified by the use of square brackets [ and ]).
 						p
 							|<strong>indexed_date</strong>
 							br
-							|Matches articles indexed in our database within a specific date range. For example <strong>date:{2012-01-01 TO 2012-12-31}</strong> matches articles published between the inclusive range 2012-01-01 - 2012-12-31 (as specified by the use of curly brackets { and }). Curly and square brackets can be combined.
+							|Matches articles indexed in our database within a specific date range. For example the expression <strong>date:{2012-01-01 TO 2012-12-31}</strong> matches articles published between the inclusive range 2012-01-01 - 2012-12-31 (as specified by the use of curly brackets { and }). Curly and square brackets can be combined.
 			//div(class='row')
 				div(class='col-md-6 col-xs-12 centered')
 					input(type='text' ng-class='inputClass' placeholder='' ng-model='query' ng-keypress='toThaana($event)' value='{{query}}' ng-enter='getResults()' autofocus)
