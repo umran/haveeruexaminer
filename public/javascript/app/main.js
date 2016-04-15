@@ -2,7 +2,7 @@ main
 .controller('primary', function($scope, $http, Scopes, ngProgressFactory){
 
 	//initialize model variables
-	$scope.query ='';
+	$scope.query =' ';
 
 	//Thaana keyboard mappings
 	var thaanaKeyboard = {}
