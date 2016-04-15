@@ -146,6 +146,7 @@ body {
 	color: #00591E;
 	text-decoration: none;
 	font-size: 14px;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	vertical-align: top;
 }
 
@@ -153,6 +154,7 @@ body {
 	vertical-align: baseline;
 	display: block;
 	font-size: 12px;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	color: rgba(0,0,0,.44);
 }
 
@@ -183,4 +185,13 @@ body {
 
 .result-body {
 	margin-top:5px;
+}
+
+/* inflate thaana headings and paragraphs */
+.thaana-text .media-heading {
+	font-size: 22px;
+}
+
+.thaana-text .result-body {
+	font-size: 18px;
 }

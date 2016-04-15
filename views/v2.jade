@@ -3,7 +3,7 @@ block content
 	//div(class='jumbotron')
 		div(class='row')
 			div(class='col-md-6 col-xs-12 centered')
-				input(type='text' ng-class='inputClass' placeholder='' ng-model='query' ng-keypress='toThaana(event)' value='{{query}}' ng-enter='getResults()' autofocus)
+				input(type='text' ng-class='inputClass' placeholder='' ng-model='query' ng-keypress='toThaana($event)' value='{{query}}' ng-enter='getResults()' autofocus)
 		div(class='row home-btn-group')
 			div(class='col-md-6 col-xs-8 centered')
 				div(class='btn-group' role='group')

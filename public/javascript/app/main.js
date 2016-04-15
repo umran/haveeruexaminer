@@ -39,13 +39,18 @@ main
 	}
 
 	//handle thaana keyboard input
-	$scope.toThaana = function(){
+	$scope.toThaana = function(event){
 		if($scope.langSh === 'en'){
 			return true;
 		}
+		
+		event = event || window.event
 	
 		if(event.which > 0){
 			var key = event.which;
+			
+			//debug
+			console.log(key);
 		}
 		else {
 			// Ignore special keys
