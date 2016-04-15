@@ -16,9 +16,13 @@ main
 	//create progress bar
 	$scope.progressbar = ngProgressFactory.createInstance();
 	$scope.progressbar.setColor('#093F84');
+	
 	//initially show primary search and hide results
 	$scope.showResults = true;
 	$scope.showDoc = false;
+	
+	//initially show primer
+	$scope.showPrimer = true;
 	
 	//set default language and input type to English
 	$scope.lang = 'English';
@@ -101,7 +105,7 @@ main
 		}
 		var query = $scope.query;
 		
-		$http.get('/search/'+query+'/'+page)
+		$http.get('/search/'+encodeURIComponent(query)+'/'+page)
 		.success(function(data, status, headers, config){
 			if(data.code === 0){
 				return;
@@ -119,6 +123,9 @@ main
 				}
 				$scope.pages.push(s);
 			}
+			
+			//hide primer
+			$scope.showPrimer = false;
 			
 			//complete progress bar on load
 			$scope.progressbar.complete();

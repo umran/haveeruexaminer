@@ -8,7 +8,7 @@ var utilities = new Utilities;
 
 /* GET users listing. */
 router.get('/:query/:page?', function(req, res, next) {
-  var userQuery = req.params.query;
+  var userQuery = decodeURIComponent(req.params.query);
   
   //debugging
   console.log(userQuery);
