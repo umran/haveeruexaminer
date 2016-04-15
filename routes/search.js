@@ -66,6 +66,7 @@ router.get('/:query/:page?', function(req, res, next) {
   		var item = {};
   		item.title = result._source.r_title;
   		item.url = result._source.url;
+  		item.byline = result._source.r_byline;
   		item.hash = result._source.hash;
   		item.date = result._source.date;
   		
