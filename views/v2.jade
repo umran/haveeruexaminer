@@ -82,14 +82,14 @@ block content
 		div(class='row')
 			div(class='col-xs-12 col-md-12')
 				div(class='{{document.lang}}')				
-					h2()
+					h2(class='article-heading')
 						|{{document.title}}
 					.post-meta-summary
 						a(class='post-meta-link-author' href='#')
 							|{{document.url}}
 						span(class='post-meta-supplemental')
 							span(am-time-ago='document.date')
-					p(class='result-body' ng-bind-html='document.main | html')
+					p(class='article-body' ng-bind-html='document.main | html')
 			// display feed
 			//div(class='col-xs-12 col-md-6' id='row2')
 				div(class='feed pull-right' id='feed' ng-controller='feed')

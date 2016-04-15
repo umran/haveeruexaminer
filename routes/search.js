@@ -26,7 +26,7 @@ router.get('/:query/:page?', function(req, res, next) {
   	size: perPage,
   	body: {
     	query: {
-        multi_match: {
+        query_string: {
           query: userQuery,
           fields: ["r_title", "r_intro", "fulltext"]
         }
