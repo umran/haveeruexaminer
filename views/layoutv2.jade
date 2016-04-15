@@ -29,7 +29,7 @@ html
 							span(class='icon-bar')
 						a(class='navbar-brand')
 							img(src='/graphics/logo/alt24.svg')
-					div(class='input-group searchBar')
+					//div(class='input-group searchBar')
 						input(type='text' ng-class='inputClass' placeholder='' ng-model='query' ng-keypress='toThaana($event)' value='{{query}}' ng-enter='getResults()' autofocus)
 						div(class='input-group-btn')
 							button(type='button' class='btn btn-primary' ng-click='getResults()')
@@ -46,7 +46,7 @@ html
 								li(class='thaana')
 									a(href='' ng-click='setLang(1)')
 										|ދިވެހި
-					//div(class='collapse navbar-collapse' id='nav-collapse')
+					div(class='collapse navbar-collapse' id='nav-collapse')
 						ul(class='nav navbar-nav navbar-right')
 							li
 								a(href='#')
@@ -60,6 +60,24 @@ html
 								a(href='https://github.com/umran/haveerucrawler')
 									span(class='octicon octicon-mark-github')
 									|	Github
+			div(class='container')
+				div(class='input-group searchBar')
+					input(type='text' ng-class='inputClass' placeholder='' ng-model='query' ng-keypress='toThaana($event)' value='{{query}}' ng-enter='getResults()' autofocus)
+					div(class='input-group-btn')
+						button(type='button' class='btn btn-primary' ng-click='getResults()')
+							|<strong>Search</strong>
+						button(type='button' class='btn btn-primary')
+							span(class='glyphicon glyphicon-cog')
+						button(type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+							|<strong>{{langSh}}</strong>	
+							span(class='caret')
+						ul(class='dropdown-menu')
+							li
+								a(href='' ng-click='setLang(0)')
+									|English
+							li(class='thaana')
+								a(href='' ng-click='setLang(1)')
+									|ދިވެހި
 		block content
 		block foot
 			footer(class='footer')
