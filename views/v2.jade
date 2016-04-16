@@ -101,7 +101,9 @@ block content
 								a(class='post-meta-link-author' href='#')
 									|{{result.url}}
 								span(class='post-meta-supplemental')
-									span(am-time-ago='result.date')
+									span(class='text-warning' am-time-ago='result.date')
+									span(class='text-warning')
+										|<strong>{{result.byline}}</strong>
 							p(class='result-body' ng-bind-html='result.excerpt | html')
 				ul(class='pagination pagination-sm')
 					li(ng-repeat='page in pages')
@@ -117,7 +119,9 @@ block content
 						a(class='post-meta-link-author' href='#')
 							|{{document.url}}
 						span(class='post-meta-supplemental')
-							span(am-time-ago='document.date')
+							span(class='text-warning' am-time-ago='document.date')
+							span(class='text-warning')
+								|<strong>{{document.byline}}</strong>
 					p(class='article-body' ng-bind-html='document.main | html')
 			// display feed
 			//div(class='col-xs-12 col-md-6' id='row2')
