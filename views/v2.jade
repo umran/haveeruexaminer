@@ -53,7 +53,7 @@ block content
 						p
 							|<strong>url</strong>
 							br
-							|Matches queries on article urls. For example the expression <strong>url:(haveeru.com.mv\/news\/50042)</strong> matches documents whose url contains 'haveeru.com.mv/news/50042'. Notice that all forward slashes are escaped. This is because queries with unescaped forward slashes are interpreted as regular expressions. Exact url matching can be done by simply wrapping the escaped url string around double quotes " ".
+							|Matches queries on article urls. For example the expression <strong>url:(haveeru.com.mv\/news\/50042)</strong> matches documents whose url contains any of the terms separated by forward slashes in the following expression: 'haveeru.com.mv/news/50042'. Notice that all forward slashes are escaped. This is because queries with unescaped forward slashes are interpreted as regular expressions. <strong>Please avoid using the suffix 'http://' in your queries as this messes up tokenization.</strong> Exact url matching without tokenization can be done by simply wrapping the escaped url string around double quotes " ".
 						p
 							|<strong>r_title</strong>
 							br
