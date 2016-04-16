@@ -58,7 +58,7 @@ router.get('/:query/:page?', function(req, res, next) {
 		res.setHeader('Content-Type', 'application/json');
 		res.send(JSON.stringify({
 			code: 0,
-			response: 'Our search server appears to be offline. If you could please report this to <a href="https://twitter.com/elemetrics01"><strong>@elemetrics01</strong></a>!'
+			response: 'Our search server appears to be offline. If you could please report this to <a href="https://twitter.com/elemetrics01"><strong>@elemetrics01</strong></a> that would be awesome!'
 		}));
 		return;
 	}
