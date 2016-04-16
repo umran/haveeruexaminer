@@ -36,21 +36,21 @@ router.get('/:query/:page?', function(req, res, next) {
         pre_tags: ['<strong>'],
         post_tags: ['</strong>'],
         fields: {
-          r_intro: {fragment_size: 150, number_of_fragments: 0},
+          r_intro: {fragment_size: 150, number_of_fragments: 1},
           fulltext: {fragment_size: 150, number_of_fragments: 3}
         }
     	}
     }
   },
   function (error, response) {
-    if(error){
-    	res.setHeader('Content-Type', 'application/json');
-    	res.send(JSON.stringify({
-    		code: 0,
-    		response: 'Search Server Unavailable'
-    	}));
-    	return;
-  	}
+	if(error){
+		res.setHeader('Content-Type', 'application/json');
+		res.send(JSON.stringify({
+			code: 0,
+			response: 'Search Server Unavailable'
+		}));
+		return;
+	}
   	
   	//parse results
   	var pretty = {};
@@ -64,6 +64,7 @@ router.get('/:query/:page?', function(req, res, next) {
   	var results = response.hits.hits;
   	results.forEach(function(result){
   		var item = {};
+  		item.score = result._score;
   		item.title = result._source.r_title;
   		item.url = result._source.url;
   		item.byline = result._source.r_byline;
