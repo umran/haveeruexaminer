@@ -44,7 +44,7 @@ router.get('/:query/:page?', function(req, res, next) {
   },
   function (error, response) {
 	if(error){
-		if(error.status == 400){
+		if(error.status && error.status == 400){
 			res.setHeader('Content-Type', 'application/json');
 			res.send(JSON.stringify({
 				code: 0,
