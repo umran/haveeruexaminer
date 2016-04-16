@@ -18,6 +18,13 @@ block content
 					li(class='thaana')
 						a(href='' ng-click='setLang(1)')
 							|ދިވެހި
+	// this expands when the search server returns any errors
+	div(ng-show='showError' ng-hide='hideError')
+		div(class='container')
+			div(class='row')
+				div(class='col-xs-12 col-md-12')
+					div(class='alert alert-danger alert-dismissible' role='alert')
+						p(ng-bind-html='errorMsg | html')
 	div(ng-show='showPrimer')
 		div(class='container')
 			div(class='row')
@@ -43,6 +50,10 @@ block content
 							|The query string is parsed into a series of terms and operators. A term can be a single word — 'quick' or 'brown' — or a phrase, surrounded by double quotes — "quick brown" — which searches for all the words in the phrase, in the same order
 						p
 							|You may fine-tune your search by performing subqueries on specific fields. For example you might want to search for all articles containing the term 'protest' that was published in the year 2012. This query can be represented by the following expression: <strong>protest AND date:[2012-01-01 TO 2012-12-31]</strong>. All available fields and some operators are explained below. The full syntax reference is available <a href='https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax'>here</a>
+						p
+							|<strong>url</strong>
+							br
+							|Matches queries on article urls. For example the expression <strong>url:(haveeru.com.mv\/news\/50042)</strong> matches documents whose url contains 'haveeru.com.mv/news/50042'. Notice that all forward slashes are escaped. This is because queries with unescaped forward slashes are interpreted as regular expressions. Exact url matching can be done by simply wrapping the escaped url string around double quotes " ".
 						p
 							|<strong>r_title</strong>
 							br
@@ -84,7 +95,6 @@ block content
 							li(class='thaana')
 								a(href='' ng-click='setLang(1)')
 									|ދިވެހި
-	
 	// this expands upon submitting search to reveal results
 	div(class='container' ng-show='showResults')
 		div(class='row')

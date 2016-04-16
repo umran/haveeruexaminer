@@ -20,6 +20,8 @@ main
 	//initially show primary search and hide results
 	$scope.showResults = true;
 	$scope.showDoc = false;
+	$scope.showError = false;
+	$scope.hideError = true;
 	
 	//initially show primer
 	$scope.showPrimer = true;
@@ -96,7 +98,9 @@ main
 	$scope.getResults = function(page){
 		//start progress bar on click
 		$scope.progressbar.start();
-	
+		//hide primer
+		$scope.showPrimer = false;
+		
 		$scope.showResults = true;
 		$scope.showDoc = false;
 		
@@ -108,9 +112,23 @@ main
 		$http.get('/search/'+encodeURIComponent(query)+'/'+page)
 		.success(function(data, status, headers, config){
 			if(data.code === 0){
+				
+				$scope.errorMsg = data.response;
+				
+				//set show error to true
+				$scope.showError = true;
+				$scope.hideError = false;
+				
+				//complete progress bar on error too
+				$scope.progressbar.complete();
+				
 				return;
 			}
-
+			
+			//delete previous error messages
+			$scope.showError = false;
+			$scope.hideError = true;
+			
 			$scope.meta = +data.response.meta.hits+' hits in '+(data.response.meta.time/1000)+' seconds';
 			$scope.results = data.response.items;
 			
@@ -124,15 +142,14 @@ main
 				$scope.pages.push(s);
 			}
 			
-			//hide primer
-			$scope.showPrimer = false;
-			
 			//complete progress bar on load
 			$scope.progressbar.complete();
 		})
 		.error(function(data, status, headers, config){
+			
 			//complete progress bar on error too
 			$scope.progressbar.complete();
+			
 			return;
 		});
 	}

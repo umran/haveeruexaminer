@@ -44,10 +44,21 @@ router.get('/:query/:page?', function(req, res, next) {
   },
   function (error, response) {
 	if(error){
+		console.log(error.status)
+		
+		if(error.status == 400){
+			res.setHeader('Content-Type', 'application/json');
+			res.send(JSON.stringify({
+				code: 0,
+				response: 'Your query could not be parsed - likely due to a malformed regular expression. Our search engine tries to parse all queries with unescaped forward slashes as regular expressions. If you did not intend for your query to be a regular expression, try escaping any forward slashes in your query like "\\/"'
+			}));
+			return;
+		}
+		
 		res.setHeader('Content-Type', 'application/json');
 		res.send(JSON.stringify({
 			code: 0,
-			response: 'Search Server Unavailable'
+			response: 'Our search server appears to be offline. If you could please report this to <a href="https://twitter.com/elemetrics01"><strong>@elemetrics01</strong></a>!'
 		}));
 		return;
 	}
