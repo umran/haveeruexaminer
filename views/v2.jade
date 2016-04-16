@@ -58,11 +58,11 @@ block content
 						p
 							|<strong>date</strong>
 							br
-							|Matches articles published within a specific date range. For example the expression <strong>date:[2012-01-01 TO 2012-12-31]</strong> matches articles published between the range (inclusive) 2012-01-01 - 2012-12-31 (as specified by the use of square brackets [ ])
+							|Matches articles published within a specific date range. For example the expression <strong>date:[2012-01-01 TO 2012-12-31]</strong> matches articles published between the range 2012-01-01 - 2012-12-31 (inclusive: as specified by the use of square brackets [ ])
 						p
 							|<strong>indexed_date</strong>
 							br
-							|Matches articles indexed in our database within a specific date range. For example the expression <strong>date:{2012-01-01 TO 2012-12-31}</strong> matches articles published between the range (exclusive) 2012-01-01 - 2012-12-31 (as specified by the use of curly brackets { }). Curly and square brackets can be combined
+							|Matches articles indexed in our database within a specific date range. For example the expression <strong>date:{2012-01-01 TO 2012-12-31}</strong> matches articles published between the range 2012-01-01 - 2012-12-31 (exclusive: as specified by the use of curly brackets { }). Curly and square brackets can be combined
 			//div(class='row')
 				div(class='col-md-6 col-xs-12 centered')
 					input(type='text' ng-class='inputClass' placeholder='' ng-model='query' ng-keypress='toThaana($event)' value='{{query}}' ng-enter='getResults()' autofocus)
