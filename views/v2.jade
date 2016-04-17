@@ -57,11 +57,15 @@ block content
 						p
 							|<strong>r_title</strong>
 							br
-							|Matches queries on article titles. For example the expression <strong>r_title:(Nasheed OR Maumoon)</strong> matches documents whose tile contains either 'Nasheed' or 'Maumoon'
+							|Matches queries on article titles. For example the expression <strong>r_title:(Nasheed OR Maumoon)</strong> matches documents whose title contains either 'Nasheed' or 'Maumoon'
 						p
-							|<strong>r_fulltext</strong>
+							|<strong>r_intro</strong>
 							br
-							|Matches queries on the main body of articles. For example the expression <strong>r_fulltext:("Nasheed resigns")</strong> matches documents whose body contains the phrase 'Nasheed resigns'. Please note that phrase matching only works when the phrase is wrapped around double quotes " ". Queries may also use wildcards. For example the subquery <strong>r_fulltext:(Yam*n)</strong> matches documents whose body contains any term beginning with 'Yam' and ending with 'n' (as denoted by the wildcard character * in between). The character ? may be used instead of * to match a single wildcard character instead of an unlimited number of characters. A subquery that matches a single wildcard character might look like this: <strong>r_fulltext:(Yam?n)</strong>
+							|Matches queries on the subheading of articles. For example the expression <strong>r_intro:("Nasheed resigns")</strong> matches documents whose subheading contains the phrase 'Nasheed resigns'. Please note that phrase matching only works when the phrase is wrapped around double quotes " "
+						p
+							|<strong>fulltext</strong>
+							br
+							|Matches queries on the main body of articles. For example the subquery <strong>fulltext:(Yam*n)</strong> matches documents whose body contains any term beginning with 'Yam' and ending with 'n' (as denoted by the wildcard character * in between). The character ? may be used instead of * to match a single wildcard character instead of an unlimited number of characters. A subquery that matches a single wildcard character might look like this: <strong>fulltext:(Yam?n)</strong>
 						p
 							|<strong>r_byline</strong>
 							br
