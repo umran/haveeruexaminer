@@ -1,4 +1,30 @@
 extends layoutv2
+block head
+	nav(class='navbar navbar-default')
+		div(class='container')
+			div(class='navbar-header')
+				button(type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#nav-collapse' aria-expanded='false')
+					span(class='sr-only')
+						|Expand Navigation Menu
+					span(class='icon-bar')
+					span(class='icon-bar')
+					span(class='icon-bar')
+				a(class='navbar-brand')
+					img(src='/graphics/logo/alt24.svg')
+			div(class='collapse navbar-collapse' id='nav-collapse')
+				ul(class='nav navbar-nav navbar-right')
+					li
+						a(href='#')
+							span(class='octicon octicon-pulse')
+							|	Analytics
+					li
+						a(href='/api/docs')
+							span(class='octicon octicon-code')
+							|	API
+					li
+						a(href='https://github.com/umran/haveerucrawler')
+							span(class='octicon octicon-mark-github')
+							|	Github
 block content
 	div(class='container')
 		div(class='input-group searchBar')
@@ -18,27 +44,22 @@ block content
 					li(class='thaana')
 						a(href='' ng-click='setLang(1)')
 							|ދިވެހި
-	// this expands when the search server returns any errors
+	
 	div(ng-show='showError' ng-hide='hideError')
 		div(class='container')
 			div(class='row')
 				div(class='col-xs-12 col-md-12')
 					div(class='alert alert-danger alert-dismissible' role='alert')
 						p(ng-bind-html='errorMsg | html')
+	
 	div(ng-show='showPrimer')
 		div(class='container')
 			div(class='row')
 				div(class='col-xs-12 col-md-12')
 					div(class='alert alert-success alert-dismissible' role='alert')
 						|<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-						//p()
-							|<strong>Holà</strong>
 						p()
 							|This resource is an approximate cache of Haveeru Online, the online website of the oldest daily in the Maldives that has been recently forced to shutdown by the government. While documents indexed here are dated from <strong>1 May 2003</strong> to <strong>31 January 2016</strong>, we can't guarantee that the documents in our archive are a comprehensive list of all articles published within that period. As we have never had direct access to the documents when they were being hosted by Haveeru Online, we've had to rely on a heuristic algorithm to scrape articles from their website. Full source code for the program used to spider Haveeru Online is available <a href='https://github.com/umran/haveerucrawler'>here</a> 
-						//p()
-							|<strong>Advanced Search and API Coming Soon</strong>
-						//p()
-							|We're working on an extension that will allow a more fine tuned analysis on the data. The most immediate feature to that effect will be the implementation of a date filter. A RESTful API upon which 3rd party applications can leverage all our search capabilities is not too far from being pushed into production either
 		div(class='container')
 			div(class='row')
 				div(class='col-xs-12 col-md-12')
@@ -78,28 +99,7 @@ block content
 							|<strong>indexed_date</strong>
 							br
 							|Matches articles indexed in our database within a specific date range. For example the expression <strong>date:{2012-01-01 TO 2012-12-31}</strong> matches articles published between the range 2012-01-01 - 2012-12-31 (exclusive: as specified by the use of curly brackets { }). Curly and square brackets can be combined
-			//div(class='row')
-				div(class='col-md-6 col-xs-12 centered')
-					input(type='text' ng-class='inputClass' placeholder='' ng-model='query' ng-keypress='toThaana($event)' value='{{query}}' ng-enter='getResults()' autofocus)
-			//div(class='row home-btn-group')
-				div(class='col-md-6 col-xs-8 centered')
-					div(class='btn-group' role='group')
-						button(type='button' class='btn btn-primary' ng-click='getResults()')
-							|<strong>Search</strong>
-						button(type='button' class='btn btn-primary')
-							span(class='glyphicon glyphicon-cog')
-					div(class='btn-group btn-is-next')
-						button(type='button' class='btn btn-link dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-								|Language: <strong>{{lang}}</strong>	
-								span(class='caret icon-is-next')
-						ul(class='dropdown-menu')
-							li
-								a(href='' ng-click='setLang(0)')
-									|English
-							li(class='thaana')
-								a(href='' ng-click='setLang(1)')
-									|ދިވެހި
-	// this expands upon submitting search to reveal results
+	
 	div(class='container' ng-show='showResults')
 		div(class='row')
 			div(class='col-xs-12 col-md-12')
@@ -108,7 +108,7 @@ block content
 						|{{meta}}
 					li(class='media {{result.lang}}' ng-repeat='result in results')
 						div(class='media-body')
-							h4(class='media-heading')
+							h4(class='media-heading {{result.lang}}')
 								a(href='' ng-click='fetchDoc(result.hash)')
 									|{{result.title}}
 							.post-meta-summary
@@ -123,6 +123,7 @@ block content
 					li(ng-repeat='page in pages')
 						a(href='' ng-click='getResults(page)')
 							|{{page}}
+	
 	div(class='container' ng-show='showDoc')
 		div(class='row')
 			div(class='col-xs-12 col-md-12')
@@ -137,25 +138,3 @@ block content
 							span(class='text-warning')
 								|<strong>{{document.byline}}</strong>
 					p(class='article-body' ng-bind-html='document.main | html')
-			// display feed
-			//div(class='col-xs-12 col-md-6' id='row2')
-				div(class='feed pull-right' id='feed' ng-controller='feed')
-					div(class='item {{item.lang}}' ng-repeat='item in items')
-						div(class='post')
-							div(class='panel panel-default')
-								div(class='panel-body')
-									h3(class='post-title {{item.lang}}')
-										a(href='' ng-click='fetchDoc(item.hash)')
-											|{{item.title}}
-									p(class='post-body')
-										|{{item.intro}}
-									p(class='post-body' ng-bind-html='item.main | html')
-								div(class='panel-heading')
-									//.post-meta-avatar
-										img(src='https://cdn-images-1.medium.com/fit/c/72/72/1*UZtp1fi_asudK3AaEwuniw.jpeg' class='profile-image avatar')
-									.post-meta-summary
-										a(class='post-meta-link-author' href='#')
-											|{{item.url}}
-										span(class='post-meta-supplemental')
-											span(am-time-ago='item.date')
-	
