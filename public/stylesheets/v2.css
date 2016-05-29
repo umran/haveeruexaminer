@@ -211,3 +211,12 @@ body {
 .article-body {
 	margin-top: 15px;
 }
+
+/* Irukandji Labs */
+.irukandjilabs {
+
+}
+
+.irukandjilabs>img {
+	height: 48px;
+}
