@@ -10,7 +10,7 @@ block head
 					span(class='icon-bar')
 					span(class='icon-bar')
 				a(class='navbar-brand')
-					img(src='/graphics/logo/alt24.svg')
+					|Haveeru Examiner
 			div(class='collapse navbar-collapse' id='nav-collapse')
 				ul(class='nav navbar-nav navbar-right')
 					li
@@ -35,7 +35,7 @@ block content
 				button(type='button' class='btn btn-primary')
 					span(class='glyphicon glyphicon-cog')
 				button(type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-					|<strong>{{langSh}}</strong>	
+					|<strong>{{langSh}}</strong>
 					span(class='caret')
 				ul(class='dropdown-menu')
 					li
@@ -44,14 +44,14 @@ block content
 					li(class='thaana')
 						a(href='' ng-click='setLang(1)')
 							|ދިވެހި
-	
+
 	div(ng-show='showError' ng-hide='hideError')
 		div(class='container')
 			div(class='row')
 				div(class='col-xs-12 col-md-12')
 					div(class='alert alert-danger alert-dismissible' role='alert')
 						p(ng-bind-html='errorMsg | html')
-	
+
 	div(ng-show='showPrimer')
 		div(class='container')
 			div(class='row')
@@ -59,7 +59,7 @@ block content
 					div(class='alert alert-success alert-dismissible' role='alert')
 						|<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 						p()
-							|This resource is an approximate cache of Haveeru Online, the online website of the oldest daily in the Maldives that has been recently forced to shutdown by the government. While documents indexed here are dated from <strong>1 May 2003</strong> to <strong>31 January 2016</strong>, we can't guarantee that the documents in our archive are a comprehensive list of all articles published within that period. As we have never had direct access to the documents when they were being hosted by Haveeru Online, we've had to rely on a heuristic algorithm to scrape articles from their website. Full source code for the program used to spider Haveeru Online is available <a href='https://github.com/umran/haveerucrawler'>here</a> 
+							|This resource is an approximate cache of Haveeru Online, the online website of the oldest Maldivian daily that has been forced to shutdown. While documents indexed here are dated from <strong>1 May 2003</strong> to <strong>31 January 2016</strong>, we can't guarantee that our coverage of the documents are comprehensive. As we have never had direct access to the documents when they were being hosted by Haveeru Online, we have had to rely on a heuristic algorithm to scrape articles from their website. Full source code for the program used to spider Haveeru Online is available <a href='https://github.com/umran/haveerucrawler'>here</a>
 		div(class='container')
 			div(class='row')
 				div(class='col-xs-12 col-md-12')
@@ -74,23 +74,23 @@ block content
 						p
 							|<strong>url</strong>
 							br
-							|Matches queries on article urls. For example the expression <strong>url:(haveeru.com.mv\/news\/50042)</strong> matches documents whose url contains any of the terms separated by forward slashes in the following expression: 'haveeru.com.mv/news/50042'. Notice that all forward slashes are escaped. This is because queries with unescaped forward slashes are interpreted as regular expressions. <strong>Please avoid using the suffix 'http://' in your queries as this messes up tokenization.</strong> Exact url matching without tokenization can be done by simply wrapping the escaped url string around double quotes " ".
+							|Matches queries against article urls. For example the expression <strong>url:(haveeru.com.mv\/news\/50042)</strong> matches documents whose url contains any of the terms separated by forward slashes in the following expression: 'haveeru.com.mv/news/50042'. Notice that all forward slashes are escaped. This is because queries with unescaped forward slashes are interpreted as regular expressions. <strong>Please avoid using the suffix 'http://' in your queries as this messes up tokenization.</strong> Exact url matching without tokenization can be done by simply wrapping the escaped url string around double quotes " ".
 						p
 							|<strong>r_title</strong>
 							br
-							|Matches queries on article titles. For example the expression <strong>r_title:(Nasheed OR Maumoon)</strong> matches documents whose title contains either 'Nasheed' or 'Maumoon'
+							|Matches queries against article titles. For example the expression <strong>r_title:(Nasheed OR Maumoon)</strong> matches documents whose title contains either 'Nasheed' or 'Maumoon'
 						p
 							|<strong>r_intro</strong>
 							br
-							|Matches queries on the subheading of articles. For example the expression <strong>r_intro:("Nasheed resigns")</strong> matches documents whose subheading contains the phrase 'Nasheed resigns'. Please note that phrase matching only works when the phrase is wrapped inside double quotes " "
+							|Matches queries against the subheading of articles. For example the expression <strong>r_intro:("Nasheed resigns")</strong> matches documents whose subheading contains the phrase 'Nasheed resigns'. Please note that phrase matching only works when the phrase is wrapped inside double quotes " "
 						p
 							|<strong>fulltext</strong>
 							br
-							|Matches queries on the main body of articles. For example the subquery <strong>fulltext:(Yam*n)</strong> matches documents whose body contains any term beginning with 'Yam' and ending with 'n' (as denoted by the wildcard character * in between). The character ? may be used instead of * to match a single wildcard character instead of an unlimited number of characters. A subquery that matches a single wildcard character might look like this: <strong>fulltext:(Yam?n)</strong>
+							|Matches queries against the main body of articles. For example the subquery <strong>fulltext:(Yam*n)</strong> matches documents whose body contains any term beginning with 'Yam' and ending with 'n' (as denoted by the wildcard character * in between). The character ? may be used instead of * to match a single wildcard character instead of an unlimited number of characters. A subquery that matches a single wildcard character might look like this: <strong>fulltext:(Yam?n)</strong>
 						p
 							|<strong>r_byline</strong>
 							br
-							|Matches queries on article authors. For example the expression <strong>r_byline:(+Ahmed -Mohamed)</strong> matches documents whose byline includes the term 'Ahmed' (as specified by the + symbol), but does not include the term 'Mohamed' (as denoted by the - symbol)
+							|Matches queries against article bylines. For example the expression <strong>r_byline:(+Ahmed -Mohamed)</strong> matches documents whose byline includes the term 'Ahmed' (as specified by the + symbol), but does not include the term 'Mohamed' (as denoted by the - symbol)
 						p
 							|<strong>date</strong>
 							br
@@ -99,7 +99,7 @@ block content
 							|<strong>indexed_date</strong>
 							br
 							|Matches articles indexed in our database within a specific date range. For example the expression <strong>date:{2012-01-01 TO 2012-12-31}</strong> matches articles published between the range 2012-01-01 - 2012-12-31 (exclusive: as specified by the use of curly brackets { }). Curly and square brackets can be combined
-	
+
 	div(class='container' ng-show='showResults')
 		div(class='row')
 			div(class='col-xs-12 col-md-12')
@@ -123,7 +123,7 @@ block content
 					li(ng-repeat='page in pages')
 						a(href='' ng-click='getResults(page)')
 							|{{page}}
-	
+
 	div(class='container' ng-show='showDoc')
 		div(class='row')
 			div(class='col-xs-12 col-md-12')
