@@ -11,7 +11,7 @@ var MongoStore = require('connect-mongo')(session);
 var passport = require('./dependencies/auth');
 
 var v2 = require('./routes/v2');
-//var search = require('./routes/search');
+var search = require('./routes/search');
 var auth = require('./routes/auth');
 var crawlerfeed = require('./routes/crawlerfeed');
 var feed = require('./routes/feed');
@@ -35,9 +35,9 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: { secure: true },
-    store: new MongoStore({ 
-    	mongooseConnection: conn, 
-    	ttl: 1 * 1 * 5 * 60 
+    store: new MongoStore({
+    	mongooseConnection: conn,
+    	ttl: 1 * 1 * 5 * 60
     })
 }));
 
@@ -62,7 +62,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', v2);
-//app.use('/search', search);
+app.use('/search', search);
 app.use('/auth', auth);
 app.use('/crawlerfeed', crawlerfeed);
 app.use('/feed', feed);
