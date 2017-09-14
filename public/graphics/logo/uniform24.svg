@@ -7,6 +7,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="120.84132"
@@ -17,9 +18,14 @@
    inkscape:export-filename="/Users/umran/haveeruexaminer/public/graphics/logo/logo-alt300.png"
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300"
-   sodipodi:docname="alt24.svg">
+   sodipodi:docname="uniform24.svg">
   <defs
      id="defs4">
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#pattern122"
+       id="pattern129"
+       patternTransform="translate(195.60547,235.07635)" />
     <pattern
        patternUnits="userSpaceOnUse"
        width="120.84131"
@@ -112,6 +118,22 @@
         </g>
       </g>
     </pattern>
+    <pattern
+       patternUnits="userSpaceOnUse"
+       width="120.84131"
+       height="24"
+       patternTransform="translate(195.60547,235.07635)"
+       id="pattern122">
+      <g
+         id="g119"
+         transform="translate(-195.60547,-235.07635)">
+        <path
+           id="rect116"
+           d="m 195.60547,235.07635 h 120.84131 v 24 H 195.60547 Z"
+           style="fill:url(#pattern98);stroke:none"
+           inkscape:connector-curvature="0" />
+      </g>
+    </pattern>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -185,15 +207,12 @@
          x="201.06183"
          y="263.50574"
          style="font-size:10.22808075px;line-height:1.25;stroke-width:0.73057723"> </tspan></text>
-    <g
-       id="g119">
-      <rect
-         id="rect116"
-         y="235.07635"
-         x="195.60547"
-         height="24"
-         width="120.84131"
-         style="stroke:none;fill:url(#pattern98)" />
-    </g>
+    <path
+       sodipodi:type="inkscape:offset"
+       inkscape:radius="0"
+       inkscape:original="M 195.60547 235.07617 L 195.60547 259.07617 L 316.44727 259.07617 L 316.44727 235.07617 L 195.60547 235.07617 z "
+       style="fill:url(#pattern129);stroke:none"
+       id="rect126"
+       d="m 195.60547,235.07617 v 24 h 120.8418 v -24 z" />
   </g>
 </svg>
